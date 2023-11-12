@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0e6tnbfhjex"]
+[gd_scene load_steps=18 format=3 uid="uid://d0e6tnbfhjex"]
 
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="1_5imua"]
 [ext_resource type="Script" path="res://world/main.gd" id="1_icc58"]
@@ -6,17 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="3_8mqvm"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_dk5kd"]
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="5_3xwli"]
+[ext_resource type="PackedScene" uid="uid://b24djh3puus84" path="res://scenes/marble.tscn" id="7_hgsbn"]
+[ext_resource type="PackedScene" uid="uid://cj88g12tilc48" path="res://scenes/normal_track.tscn" id="8_ssj37"]
+
+[sub_resource type="Sky" id="Sky_old42"]
+
+[sub_resource type="Environment" id="Environment_51nsp"]
+background_mode = 2
+sky = SubResource("Sky_old42")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fulbr"]
 radius = 0.4
 height = 1.7
 
-[sub_resource type="Environment" id="Environment_w1kxq"]
-background_mode = 1
-background_color = Color(0, 0, 0, 0)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_wjshb"]
-size = Vector3(5, 0.2, 5)
+size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_faqgv"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -27,10 +31,18 @@ size = Vector3(0.5, 0.5, 0.5)
 material = SubResource("StandardMaterial3D_5l8dt")
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_xuivp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pddpg"]
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_icc58")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_51nsp")
+
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_wkmbl")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
@@ -38,6 +50,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5248, 0)
 
 [node name="Neck" type="Node3D" parent="XROrigin3D/XRCamera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+
+[node name="DebugWindow" type="Label3D" parent="XROrigin3D/XRCamera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155313, 0.0137547, -0.8)
+text = "Test"
+font_size = 10
+outline_size = 1
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881791, 0)
@@ -62,11 +80,8 @@ tracker = &"right_hand"
 
 [node name="FunctionPickup" parent="XROrigin3D/Right" instance=ExtResource("3_dk5kd")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.57173, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_w1kxq")
+[node name="OmniLight3D" type="OmniLight3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -76,6 +91,7 @@ shape = SubResource("BoxShape3D_wjshb")
 
 [node name="PickableObject" parent="." instance=ExtResource("5_3xwli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.181782, 0.354613, -0.804333)
+visible = false
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="PickableObject"]
 shape = SubResource("BoxShape3D_faqgv")
@@ -86,6 +102,7 @@ skeleton = NodePath("../CollisionShape3D2")
 
 [node name="PickableObject2" parent="." instance=ExtResource("5_3xwli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38134, 0.354613, -0.807271)
+visible = false
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="PickableObject2"]
 shape = SubResource("BoxShape3D_faqgv")
@@ -93,3 +110,39 @@ shape = SubResource("BoxShape3D_faqgv")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PickableObject2"]
 mesh = SubResource("BoxMesh_frw5r")
 skeleton = NodePath("../CollisionShape3D2")
+
+[node name="Marble" parent="." instance=ExtResource("7_hgsbn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35912, 0.766319, -0.0112236)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.403855, 0, 0, 0, 1, 1.36645, 0.247366, 0)
+mesh = SubResource("CylinderMesh_xuivp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.403855, 0, 0, 0, 1, 1.36645, 0.247366, 0)
+shape = SubResource("CylinderShape3D_pddpg")
+
+[node name="NormalTrack" parent="." instance=ExtResource("8_ssj37")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 1.01955, 0.95134, 0.823078)
+
+[node name="NormalTrack5" parent="." instance=ExtResource("8_ssj37")]
+transform = Transform3D(0.0482963, -0.012941, 0, 0.012941, 0.0482963, 0, 0, 0, 0.05, 0.564388, 0.89145, 0.823078)
+
+[node name="NormalTrack6" parent="." instance=ExtResource("8_ssj37")]
+transform = Transform3D(0.0482963, -0.012941, 0, 0.012941, 0.0482963, 0, 0, 0, 0.05, 0.164388, 0.79145, 0.823078)
+
+[node name="NormalTrack7" parent="." instance=ExtResource("8_ssj37")]
+transform = Transform3D(0.0482963, -0.012941, 0, 0.012941, 0.0482963, 0, 0, 0, 0.05, -0.235612, 0.69145, 0.823078)
+
+[node name="NormalTrack2" parent="." instance=ExtResource("8_ssj37")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 1.51955, 0.95134, 0.823078)
+
+[node name="NormalTrack3" parent="." instance=ExtResource("8_ssj37")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 2.51955, 0.95134, 0.823078)
+
+[node name="NormalTrack4" parent="." instance=ExtResource("8_ssj37")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 2.01955, 0.95134, 0.823078)
+
+[connection signal="button_pressed" from="XROrigin3D/Left" to="XROrigin3D" method="_on_left_button_pressed"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj88g12tilc48"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mkuim"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jc2r1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4qtl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_56vh5"]
+
+[node name="NormalTrack" type="Node3D"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0)
+
+[node name="Left" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Left"]
+transform = Transform3D(10, 0, 0, 0, 0.216506, -1.25, 0, 0.125, 2.16506, 0, 0.2, -2.76183)
+mesh = SubResource("BoxMesh_mkuim")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Left"]
+transform = Transform3D(10, 0, 0, 0, 0.216506, -1.25, 0, 0.125, 2.16506, 0, 0.2, -2.76183)
+shape = SubResource("BoxShape3D_jc2r1")
+
+[node name="Middle" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Middle"]
+transform = Transform3D(10, 0, 0, 0, 0.25, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("BoxMesh_mkuim")
+skeleton = NodePath("../../Left")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Middle"]
+transform = Transform3D(10, 0, 0, 0, 0.25, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("BoxShape3D_g4qtl")
+
+[node name="Right" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Right"]
+transform = Transform3D(10, 0, 0, 0, 0.216506, 1.25, 0, -0.125, 2.16506, 0, 0.21251, 2.78701)
+shape = SubResource("BoxShape3D_56vh5")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Right"]
+transform = Transform3D(10, 0, 0, 0, 0.216506, 1.25, 0, -0.125, 2.16506, 0, 0.21251, 2.78701)
+mesh = SubResource("BoxMesh_mkuim")
+skeleton = NodePath("../../Left")

@@ -1,6 +1,7 @@
 extends XROrigin3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var debug_window = $XRCamera3D/DebugWindow
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -83,3 +84,15 @@ func _process_movement_on_input(delta):
 	$CharacterBody3D.move_and_slide()
 	# And now apply the actual movement to our origin
 	global_transform.origin += $CharacterBody3D.global_transform.origin - org_player_body
+
+func print_vr(text:String):
+	debug_window.text=str(text)
+func _on_left_button_pressed(name):
+	print_vr(name)
+	if name=="ax_button":
+		debug_window.visible=!debug_window.visible
+		
+	
+		
+		
+		

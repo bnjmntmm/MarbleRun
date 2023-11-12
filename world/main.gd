@@ -28,4 +28,5 @@ func enable_passthrough() -> bool:
 		else:
 			return false
 	get_viewport().transparent_bg = true
+	
 	return true

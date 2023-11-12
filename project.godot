@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+Methods="*res://scripts/Methods.gd"
 
 [editor_plugins]
 
@@ -34,6 +35,10 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 3d_physics/layer_20="Player Body"
 3d_physics/layer_21="Pointable"
 3d_physics/layer_22="Hand Pose Area"
+
+[physics]
+
+3d/physics_engine="JoltPhysics3D"
 
 [rendering]
 
