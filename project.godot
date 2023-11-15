@@ -38,7 +38,8 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 [physics]
 
-3d/physics_engine="JoltPhysics3D"
+common/physics_ticks_per_second=90
+jolt_3d/sleep/enabled=false
 
 [rendering]
 

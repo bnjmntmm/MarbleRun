@@ -1,19 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://b24djh3puus84"]
+[gd_scene load_steps=7 format=3 uid="uid://b24djh3puus84"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_q3r6x"]
+[ext_resource type="Texture2D" uid="uid://ydv1r4b1plym" path="res://assets/building_blocks/Unbenannt.png" id="2_a8b6e"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jjvvq"]
+friction = 0.3
+bounce = 0.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gphyj"]
 margin = 0.01
+radius = 0.05
 
 [sub_resource type="SphereMesh" id="SphereMesh_5b1b8"]
 lightmap_size_hint = Vector2i(17, 9)
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjhqa"]
+albedo_texture = ExtResource("2_a8b6e")
 
 [node name="Marble" instance=ExtResource("1_q3r6x")]
+physics_material_override = SubResource("PhysicsMaterial_jjvvq")
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("SphereShape3D_gphyj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("SphereMesh_5b1b8")
+surface_material_override/0 = SubResource("StandardMaterial3D_wjhqa")

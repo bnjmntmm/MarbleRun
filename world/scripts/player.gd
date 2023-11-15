@@ -2,9 +2,12 @@ extends XROrigin3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var debug_window = $XRCamera3D/DebugWindow
+@onready var marble = $"../Marble"
+var origin_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	origin_pos = marble.global_position
 	pass # Replace with function body.
 
 
@@ -91,6 +94,10 @@ func _on_left_button_pressed(name):
 	print_vr(name)
 	if name=="ax_button":
 		debug_window.visible=!debug_window.visible
+	if name=="by_button":
+		get_tree().reload_current_scene()
+		
+		
 		
 	
 		
