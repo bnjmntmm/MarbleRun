@@ -1,6 +1,9 @@
 @tool
 class_name XRToolsPickable
 extends RigidBody3D
+@onready var snapzone_front = $SnapzoneFront
+@onready var snapzone_back = $SnapzoneBack
+@onready var label_3d = $Label3D
 
 
 
@@ -477,5 +480,11 @@ func _set_ranged_grab_method(new_value: int) -> void:
 	ranged_grab_method = new_value
 	can_ranged_grab = new_value != RangedMethod.NONE
 func _on_dropped(pickable):
+	
 	if pickable.is_in_group("pickable_track"):
 		pickable.freeze=true
+		pickable.rotation = Vector3(0,pickable.rotation.y,0)
+
+
+func _on_area_3d_area_entered(area : Area3D):
+	pass

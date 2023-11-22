@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cry4sssohyqn3"]
+[gd_scene load_steps=9 format=3 uid="uid://cry4sssohyqn3"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/pickable.gd" id="1_mnny7"]
 
@@ -70,18 +70,45 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ohkib")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_k80qe"]
+size = Vector3(0.2, 0.1, 0.001)
+
 [node name="XRToolsPickable" type="RigidBody3D" groups=["pickable_track"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_mnny7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0112709, 0)
 shape = SubResource("BoxShape3D_tmdjr")
 
 [node name="CollisionShape3D_1" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_i1obc")
 
 [node name="straight2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_gbas2")
 skeleton = NodePath("")
+
+[node name="SnapzoneFront" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0190927, 0.102026)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapzoneFront"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0309095, 0)
+shape = SubResource("BoxShape3D_k80qe")
+
+[node name="SnapzoneBack" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0190927, -0.101541)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapzoneBack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0286527, 0)
+shape = SubResource("BoxShape3D_k80qe")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00716503, 0.142792, 0.0251222)
+billboard = 1
+font_size = 14
+
+[connection signal="area_entered" from="SnapzoneFront" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="SnapzoneBack" to="." method="_on_area_3d_area_entered"]
