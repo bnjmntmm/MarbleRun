@@ -1,10 +1,12 @@
 @tool
 class_name XRToolsPickable
 extends RigidBody3D
-@onready var snapzone_front = $SnapzoneFront
-@onready var snapzone_back = $SnapzoneBack
-@onready var label_3d = $Label3D
+@onready var front_zone = $FrontZone
+@onready var back_zone = $BackZone
 
+@onready var label_3d = $Label3D
+var snap_radius = 0.05  # Adjust this based on your scale
+var is_snapped = false
 
 
 ## XR Tools Pickable Object
@@ -153,7 +155,7 @@ func is_xr_class(name : String) -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
 	
 	# Get all grab points
@@ -479,12 +481,41 @@ func _get_grab_point(_grabber : Node) -> XRToolsGrabPoint:
 func _set_ranged_grab_method(new_value: int) -> void:
 	ranged_grab_method = new_value
 	can_ranged_grab = new_value != RangedMethod.NONE
-func _on_dropped(pickable):
+
+		
+func _process(delta):
+	if is_snapped:
+		return
+	var nearest_snap_point = get_nearest_snap_point()
+	if nearest_snap_point != null:
+		snap_to(nearest_snap_point)
+		
+
+func get_nearest_snap_point()->Node:
+	var nearest_snap_point=null
+	var min_distance=snap_radius
+	for track_piece in get_tree().get_nodes_in_group("pickable_track"):
+		if track_piece==self:
+			continue
+		for snap_point in track_piece.get_children():
+			if "SnapPoint" in snap_point.name:
+				var distance=global_transform.origin.distance_to(snap_point.global_transform.origin)
+				if distance<min_distance:
+					min_distance=distance
+					nearest_snap_point=snap_point
+	return nearest_snap_point
+		
+func snap_to(snap_point: Node):
+	global_transform = snap_point.global_transform
 	
+	#is_snapped = true		
+func _on_dropped(pickable):
 	if pickable.is_in_group("pickable_track"):
-		pickable.freeze=true
-		pickable.rotation = Vector3(0,pickable.rotation.y,0)
-
-
-func _on_area_3d_area_entered(area : Area3D):
-	pass
+		self.freeze=true
+		#pickable.rotation = Vector3(0,pickable.rotation.y,0)
+		#pickable.freeze=true	
+func _on_picked_up(pickable):
+	if pickable.is_in_group("pickable_track"):
+		pass
+		
+	
