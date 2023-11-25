@@ -5,8 +5,10 @@ extends RigidBody3D
 @onready var back_zone = $BackZone
 
 @onready var label_3d = $Label3D
-var snap_radius = 0.05  # Adjust this based on your scale
+var snap_radius = 0.1
 var is_snapped = false
+var local_snap_points = ["SnapPoint1", "SnapPoint2"]  # Names of the snap points on this piece
+
 
 
 ## XR Tools Pickable Object
@@ -486,33 +488,47 @@ func _set_ranged_grab_method(new_value: int) -> void:
 func _process(delta):
 	if is_snapped:
 		return
-	var nearest_snap_point = get_nearest_snap_point()
-	if nearest_snap_point != null:
-		snap_to(nearest_snap_point)
+	var nearest_snap_point_data = get_nearest_snap_point()
+	if nearest_snap_point_data != null:
+		snap_to(nearest_snap_point_data)
 		
 
-func get_nearest_snap_point()->Node:
-	var nearest_snap_point=null
-	var min_distance=snap_radius
+func get_nearest_snap_point():
+	var nearest_snap_point_data = {}
+	var min_distance = snap_radius
 	for track_piece in get_tree().get_nodes_in_group("pickable_track"):
 		if track_piece==self:
 			continue
 		for snap_point in track_piece.get_children():
 			if "SnapPoint" in snap_point.name:
-				var distance=global_transform.origin.distance_to(snap_point.global_transform.origin)
-				if distance<min_distance:
-					min_distance=distance
-					nearest_snap_point=snap_point
-	return nearest_snap_point
+				for local_snap_point_name in local_snap_points:
+					var local_snap_point = self.get_node(local_snap_point_name)
+					var distance = local_snap_point.global_transform.origin.distance_to(snap_point.global_transform.origin)
+					if distance < min_distance:
+						min_distance = distance
+						nearest_snap_point_data = {"target_snap_point": snap_point, "local_snap_point": local_snap_point}
+				
+	return nearest_snap_point_data if nearest_snap_point_data else null
 		
-func snap_to(snap_point: Node):
-	global_transform = snap_point.global_transform
-	
-	#is_snapped = true		
+func snap_to(snap_point_data: Dictionary):
+	var target_snap_point = snap_point_data["target_snap_point"]
+	var local_snap_point = snap_point_data["local_snap_point"]
+
+	var local_snap_point_global = local_snap_point.global_transform.origin
+	var target_snap_point_global = target_snap_point.global_transform.origin
+
+	var new_global_position = global_transform.origin + target_snap_point_global - local_snap_point_global
+	global_transform.origin = new_global_position
+
+   
+	global_transform.basis = target_snap_point.get_parent().global_transform.basis
+	#global_transform.basis.x = target_snap_point.get_parent().global_transform.basis.x
+
+	#is_snapped = true	
 func _on_dropped(pickable):
 	if pickable.is_in_group("pickable_track"):
 		self.freeze=true
-		#pickable.rotation = Vector3(0,pickable.rotation.y,0)
+		pickable.rotation = Vector3(0,pickable.rotation.y,0)
 		#pickable.freeze=true	
 func _on_picked_up(pickable):
 	if pickable.is_in_group("pickable_track"):
