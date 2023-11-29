@@ -136,4 +136,8 @@ func get_joystick_input(_controller):
 
 
 
-
+func spawn_track(spawningTrack):
+	var newBlock = spawningTrack.instantiante()
+	get_parent().add_child(newBlock)
+	newBlock.global_position = right_hand.global_position
+	newBlock.freeze = true
