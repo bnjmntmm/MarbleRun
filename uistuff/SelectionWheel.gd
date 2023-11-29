@@ -15,6 +15,10 @@ const SPRITE_SIZE = Vector2(64, 64)
 
 var selection = 0
 
+var controller_pos :Vector2
+func _ready():
+	controller_pos = Vector2(0,0)
+
 func Close():
 	hide()
 	
@@ -89,6 +93,18 @@ func _process(delta):
 		var mouse_rads = fposmod(mouse_pos.angle() * -1, TAU)
 		selection = ceil((mouse_rads / TAU) * (len(options) - 1))
 	
+	if controller_pos == Vector2(0,0):
+		selection = 0
+	else:
+		var controller_rads = fposmod(controller_pos.angle(), TAU)
+		selection = ceil((controller_rads / TAU) * (len(options)- 1))
+	
 	#print(selection)
 	
 	queue_redraw()
+
+func get_controller_values(con_val:Vector2):
+	controller_pos = con_val
+
+func get_current_selection():
+	return selection

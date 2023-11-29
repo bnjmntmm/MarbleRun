@@ -1,10 +1,8 @@
 @tool
 class_name XRToolsPickable
 extends RigidBody3D
-@onready var front_zone = $FrontZone
-@onready var back_zone = $BackZone
 
-@onready var label_3d = $Label3D
+
 var snap_radius = 0.1
 var is_snapped = false
 var local_snap_points = ["SnapPoint1", "SnapPoint2"]  # Names of the snap points on this piece
@@ -486,11 +484,12 @@ func _set_ranged_grab_method(new_value: int) -> void:
 
 		
 func _process(delta):
-	if is_snapped:
-		return
-	var nearest_snap_point_data = get_nearest_snap_point()
-	if nearest_snap_point_data != null:
-		snap_to(nearest_snap_point_data)
+	if self.is_in_group("pickable_track"):
+		if is_snapped:
+			return
+		var nearest_snap_point_data = get_nearest_snap_point()
+		if nearest_snap_point_data != null:
+			snap_to(nearest_snap_point_data)
 		
 
 func get_nearest_snap_point():

@@ -1,13 +1,27 @@
 extends XROrigin3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-@onready var debug_window = $XRCamera3D/DebugWindow
+#@onready var debug_window = $XRCamera3D/DebugWindow
 @onready var marble = $"../Marble"
+@onready var viewport_2_din_3d = $Left/Viewport2Din3D
+@onready var label_3d = $XRCamera3D/Label3D
+@onready var left_controller = $Left
+@onready var right_hand = $Right/RightHand
+
+
+## MARBLE TRACKS INIT
+var straightBlock = ResourceLoader.load("res://scenes/pickable_straight_normal.tscn")
+var curveLargeBlock = preload("res://scenes/pickable_curve_large.tscn")
+var selectionCircle
+
 var origin_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#VIEWPORT SELECTION CIRCLE
+	selectionCircle = viewport_2_din_3d.get_scene_instance().get_child(0).get_child(1)
 	origin_pos = marble.global_position
+	
 	pass # Replace with function body.
 
 
@@ -16,6 +30,8 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
+	label_3d.text = str(selectionCircle.get_current_selection())
+	get_joystick_input(XRHelpers.get_xr_controller(self))
 	var is_colliding = _process_on_physical_movement(delta)
 	if !is_colliding:
 		_process_rotation_on_input(delta)
@@ -88,18 +104,36 @@ func _process_movement_on_input(delta):
 	# And now apply the actual movement to our origin
 	global_transform.origin += $CharacterBody3D.global_transform.origin - org_player_body
 
-func print_vr(text:String):
-	debug_window.text=str(text)
+
+#func print_vr(text:String):
+#	debug_window.text=str(text)
 func _on_left_button_pressed(name):
-	print_vr(name)
+	#print_vr(name)
 	if name=="ax_button":
-		debug_window.visible=!debug_window.visible
+		viewport_2_din_3d.visible = !viewport_2_din_3d.visible
 	if name=="by_button":
 		get_tree().reload_current_scene()
-		
-		
-		
+func _on_right_button_pressed(name):
 	
+	if name=="ax_button":
+		if selectionCircle.get_current_selection() == 1:
+			var block = straightBlock.instantiate()
+			get_parent().add_child(block)
+			block.global_position=right_hand.global_position
+			block.freeze=true
+
+			
+
+func get_joystick_input(_controller):
+	var dz_input_action = left_controller.get_vector2("primary")
+	selectionCircle.get_controller_values(dz_input_action)
+	
+	
+	#label_3d.text = str()
 		
 		
 		
+
+
+
+

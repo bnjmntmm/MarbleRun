@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@export var test: int
+
 func _process(delta):
 	if Input.is_action_just_pressed("block_select"):
 		$SelectionWheel.show()
