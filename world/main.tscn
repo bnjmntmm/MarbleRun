@@ -19,9 +19,7 @@
 background_mode = 2
 sky = SubResource("Sky_old42")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fulbr"]
-radius = 0.4
-height = 1.7
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ceij0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wjshb"]
 size = Vector3(24, 0.5, 22)
@@ -53,13 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.33269)
 font_size = 17
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881791, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0289004, 0)
-shape = SubResource("CapsuleShape3D_fulbr")
-
 [node name="Left" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.505842, 0.881791, 0)
 tracker = &"left_hand"
@@ -70,6 +61,7 @@ tracker = &"left_hand"
 
 [node name="Viewport2Din3D" parent="XROrigin3D/Left" instance=ExtResource("5_jeuif")]
 transform = Transform3D(0.199991, 0.000600229, -0.00180152, 0, 0.189745, 0.0632192, 0.00189888, -0.0632164, 0.189737, -0.00881559, 0.102512, -0.100335)
+visible = false
 screen_size = Vector2(4, 3)
 enabled = false
 scene = ExtResource("6_7463b")
@@ -85,6 +77,12 @@ tracker = &"right_hand"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90434, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_ceij0")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0)
@@ -124,4 +122,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25173, 0.674012, -0.207266)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82987, 0.648612, -0.0453901)
 
 [connection signal="button_pressed" from="XROrigin3D/Left" to="XROrigin3D" method="_on_left_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/Left" to="XROrigin3D" method="_on_left_button_released"]
 [connection signal="button_pressed" from="XROrigin3D/Right" to="XROrigin3D" method="_on_right_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/Right" to="XROrigin3D" method="_on_right_button_released"]
