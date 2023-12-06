@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://crjjptruyvyc"]
+[gd_scene load_steps=15 format=3 uid="uid://crjjptruyvyc"]
 
 [ext_resource type="Script" path="res://uistuff/SelectionWheel.gd" id="1_7v7rp"]
 [ext_resource type="Script" path="res://uistuff/UI.gd" id="1_nicyg"]
@@ -29,6 +29,42 @@ region = Rect2(384, 0, 128, 128)
 script = ExtResource("4_2dgkt")
 name = "Yellow"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgvs6"]
+atlas = ExtResource("3_ltg56")
+region = Rect2(0, 0, 128, 128)
+script = ExtResource("4_2dgkt")
+name = ""
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nutgx"]
+atlas = ExtResource("3_ltg56")
+region = Rect2(0, 0, 128, 128)
+script = ExtResource("4_2dgkt")
+name = ""
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scbfx"]
+atlas = ExtResource("3_ltg56")
+region = Rect2(0, 0, 128, 128)
+script = ExtResource("4_2dgkt")
+name = ""
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kckuk"]
+atlas = ExtResource("3_ltg56")
+region = Rect2(0, 0, 128, 128)
+script = ExtResource("4_2dgkt")
+name = ""
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67w6j"]
+atlas = ExtResource("3_ltg56")
+region = Rect2(0, 0, 128, 128)
+script = ExtResource("4_2dgkt")
+name = ""
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8nb8"]
+atlas = ExtResource("3_ltg56")
+region = Rect2(0, 0, 128, 128)
+script = ExtResource("4_2dgkt")
+name = ""
+
 [node name="Node" type="Node"]
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -57,5 +93,5 @@ script = ExtResource("1_7v7rp")
 bg_color = Color(0.0431373, 0.0431373, 0.0431373, 1)
 line_color = Color(1, 1, 1, 1)
 highlight_color = Color(0.290196, 0.290196, 0.290196, 1)
-options = Array[ExtResource("4_2dgkt")]([SubResource("AtlasTexture_qxtie"), SubResource("AtlasTexture_qcgny"), SubResource("AtlasTexture_ioas7"), SubResource("AtlasTexture_h2pv1")])
+options = Array[ExtResource("4_2dgkt")]([SubResource("AtlasTexture_qxtie"), SubResource("AtlasTexture_qcgny"), SubResource("AtlasTexture_ioas7"), SubResource("AtlasTexture_h2pv1"), SubResource("AtlasTexture_kgvs6"), SubResource("AtlasTexture_nutgx"), SubResource("AtlasTexture_scbfx"), SubResource("AtlasTexture_kckuk"), SubResource("AtlasTexture_67w6j"), SubResource("AtlasTexture_r8nb8")])
 metadata/_edit_use_anchors_ = true

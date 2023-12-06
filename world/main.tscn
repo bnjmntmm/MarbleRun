@@ -1,13 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://d0e6tnbfhjex"]
+[gd_scene load_steps=20 format=3 uid="uid://d0e6tnbfhjex"]
 
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="1_5imua"]
 [ext_resource type="Script" path="res://world/main.gd" id="1_icc58"]
 [ext_resource type="Script" path="res://world/scripts/player.gd" id="2_wkmbl"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="3_8mqvm"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_dk5kd"]
+[ext_resource type="Material" uid="uid://dbvge3quu3bju" path="res://addons/godot-xr-tools/hands/materials/caucasian_hand.material" id="4_kd6l5"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="5_jeuif"]
 [ext_resource type="PackedScene" uid="uid://crjjptruyvyc" path="res://uistuff/ui_scene.tscn" id="6_7463b"]
 [ext_resource type="PackedScene" uid="uid://b24djh3puus84" path="res://scenes/marble.tscn" id="7_hgsbn"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="8_iakps"]
 [ext_resource type="PackedScene" uid="uid://ce7vysyvondf8" path="res://addons/godot-xr-tools/objects/snap_zone.tscn" id="9_ec8x4"]
 [ext_resource type="PackedScene" uid="uid://h267j2g0hvt8" path="res://scenes/pickable_straight_normal.tscn" id="9_gcpup"]
 [ext_resource type="PackedScene" uid="uid://btrjs2ldd0413" path="res://scenes/pickable_curve_large.tscn" id="10_20lpn"]
@@ -18,8 +20,6 @@
 [sub_resource type="Environment" id="Environment_51nsp"]
 background_mode = 2
 sky = SubResource("Sky_old42")
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ceij0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wjshb"]
 size = Vector3(24, 0.5, 22)
@@ -56,6 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.505842, 0.881791, 0)
 tracker = &"left_hand"
 
 [node name="LeftHand" parent="XROrigin3D/Left" instance=ExtResource("1_5imua")]
+hand_material_override = ExtResource("4_kd6l5")
 
 [node name="FunctionPickup" parent="XROrigin3D/Left" instance=ExtResource("3_dk5kd")]
 
@@ -72,26 +73,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.501137, 0.881791, 0)
 tracker = &"right_hand"
 
 [node name="RightHand" parent="XROrigin3D/Right" instance=ExtResource("3_8mqvm")]
+hand_material_override = ExtResource("4_kd6l5")
 
 [node name="FunctionPickup" parent="XROrigin3D/Right" instance=ExtResource("3_dk5kd")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90434, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_ceij0")
+[node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+top_level = true
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("8_iakps")
+push_rigid_bodies = false
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0)
+collision_layer = 16
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_wjshb")
 
 [node name="Marble" parent="." instance=ExtResource("7_hgsbn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35912, 0.766319, -0.0112236)
+collision_mask = 196631
 mass = 0.01
 
 [node name="Zylinder" type="StaticBody3D" parent="."]

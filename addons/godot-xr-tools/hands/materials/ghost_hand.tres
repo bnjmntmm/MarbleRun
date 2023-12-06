@@ -6,6 +6,7 @@
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_wu6j1"]
 transparency = 1
 depth_draw_mode = 1
+albedo_color = Color(1, 1, 1, 0.501961)
 albedo_texture = ExtResource("1_rbe3r")
 orm_texture = ExtResource("2_qqman")
 
@@ -15,4 +16,4 @@ next_pass = SubResource("ORMMaterial3D_wu6j1")
 transparency = 1
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 1, 1, 0.25098)
+albedo_color = Color(0.992157, 0.831373, 0.839216, 0.25098)
