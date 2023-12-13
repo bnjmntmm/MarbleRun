@@ -1,19 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://crjjptruyvyc"]
+[gd_scene load_steps=9 format=3 uid="uid://crjjptruyvyc"]
 
 [ext_resource type="Script" path="res://uistuff/SelectionWheel.gd" id="1_7v7rp"]
 [ext_resource type="Script" path="res://uistuff/UI.gd" id="1_nicyg"]
 
-[sub_resource type="Environment" id="Environment_y2i1t"]
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.3
-sdfgi_bounce_feedback = 0.0
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j85ss"]
+shading_mode = 0
 albedo_color = Color(0.466667, 1, 1, 1)
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.1
-backlight = Color(0.803922, 0.803922, 0.803922, 1)
 disable_receive_shadows = true
 
 [sub_resource type="PrismMesh" id="PrismMesh_jg1ao"]
@@ -60,13 +52,6 @@ _data = {
 
 [node name="Node" type="Node"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_y2i1t")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.357983, 0.793948, -0.491421, -0.467478, 0.607986, 0.64173, 0.808278, -3.24397e-08, 0.588801, 0, 1.67295, 0)
-layers = 524288
-
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
 follow_viewport_enabled = true
@@ -104,10 +89,15 @@ transform = Transform2D(0.275, 0, 0, 0.275, 0, 0)
 
 [node name="Block1" type="SubViewportContainer" parent="CanvasLayer"]
 z_index = 4
-offset_left = 2174.55
-offset_top = 360.0
-offset_right = 2686.55
-offset_bottom = 872.0
+anchors_preset = -1
+anchor_left = 1.818
+anchor_top = 1.818
+anchor_right = 1.818
+anchor_bottom = 1.818
+offset_left = 80.2139
+offset_top = -818.064
+offset_right = 592.214
+offset_bottom = -306.064
 
 [node name="SubViewport1" type="SubViewport" parent="CanvasLayer/Block1"]
 transparent_bg = true
@@ -117,13 +107,14 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/Block1/SubViewport1"]
 transform = Transform3D(1, 0, 0, 0, 0.974358, 0.225002, 0, -0.225002, 0.974358, 0.0235426, 0.36032, -0.547518)
+visible = false
 cull_mask = 524288
 projection = 1
 current = true
 size = 1.89445
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer/Block1/SubViewport1"]
-transform = Transform3D(0.895115, 0, -0.445835, 0, 1, 0, 0.445835, 0, 0.895115, 0, 0, -1.48119)
+transform = Transform3D(1, 0, 4.46638e-06, 0, 1, 0, -4.46638e-06, 0, 1, 0, 0, -1.48119)
 layers = 524288
 material_override = SubResource("StandardMaterial3D_j85ss")
 cast_shadow = 0
@@ -139,10 +130,15 @@ libraries = {
 
 [node name="Block2" type="SubViewportContainer" parent="CanvasLayer"]
 z_index = 4
-offset_left = 1269.09
-offset_top = 865.455
-offset_right = 1781.09
-offset_bottom = 1377.45
+anchors_preset = -1
+anchor_left = 1.818
+anchor_top = 1.818
+anchor_right = 1.818
+anchor_bottom = 1.818
+offset_left = -825.246
+offset_top = -312.609
+offset_right = -313.246
+offset_bottom = 199.386
 
 [node name="SubViewport2" type="SubViewport" parent="CanvasLayer/Block2"]
 transparent_bg = true
@@ -152,6 +148,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/Block2/SubViewport2"]
 transform = Transform3D(1, 0, 0, 0, 0.974358, 0.225002, 0, -0.225002, 0.974358, -3.82231, 0.36032, -0.148788)
+visible = false
 cull_mask = 524288
 projection = 1
 current = true
