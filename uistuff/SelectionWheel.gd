@@ -11,7 +11,14 @@ const SPRITE_SIZE = Vector2(64, 64)
 @export var inner_radius: int = 64
 @export var line_width: int = 4
 
-@export var options: Array[WheelOption]
+#@export var options: Array[WheelOption]
+#@export var options: Array[WheelOptionAlt]
+#var straight_block = load("res://assets/building_blocks/straightBlock.tscn")
+#var curved_block = load("res://assets/building_blocks/curve_block.tscn")
+#var options = [straight_block, curved_block, straight_block, curved_block]
+var straightBlock = preload("res://scenes/pickable_straight_normal.tscn")
+
+@export var options = []
 
 var selection = 0
 
@@ -46,13 +53,14 @@ func _draw():
 			
 		if selection == 0:
 			draw_circle(Vector2.ZERO, inner_radius, highlight_color)
-			
+
+		
 		#Render Images into Wheel
-		draw_texture_rect_region(
-			options[0].atlas,
-			Rect2(offset, SPRITE_SIZE),
-			options[0].region
-		)
+		#draw_texture_rect_region(
+		#	options[0].atlas,
+		#	Rect2(offset, SPRITE_SIZE),
+		#	options[0].region
+		#)
 		
 		for i in range(1, len(options)):
 			var start_rads = (TAU * (i - 1)) / (len(options) - 1)
@@ -77,11 +85,12 @@ func _draw():
 				)
 			
 			var draw_pos = radius_mid * Vector2.from_angle(mid_rads) + offset
-			draw_texture_rect_region(
-				options[i].atlas,
-				Rect2(draw_pos, SPRITE_SIZE),
-				options[i].region
-			)
+			#draw_texture_rect_region(
+			#	options[i].atlas,
+			#	Rect2(draw_pos, SPRITE_SIZE),
+			#	options[i].region
+			#)
+			
 	
 func _process(delta):
 	var mouse_pos = get_local_mouse_position()
