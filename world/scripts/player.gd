@@ -19,7 +19,7 @@ var init_controller_pos : Vector3
 
 ## MARBLE TRACKS INIT
 var straightBlock = ResourceLoader.load("res://scenes/pickable_straight_normal.tscn")
-var curveLargeBlock = preload("res://scenes/pickable_curve_large.tscn")
+var curveLargeBlock = ResourceLoader.load("res://scenes/pickable_curve_large.tscn")
 var selectionCircle
 
 var origin_pos
@@ -44,7 +44,7 @@ func _physics_process(delta):
 	if !is_colliding:
 		_process_rotation_on_input(delta)
 		_process_movement_on_input(delta)
-	change_world_pos()
+	#change_world_pos()
 
 func _process_on_physical_movement(delta):
 	#current velocity
@@ -142,9 +142,17 @@ func _on_right_button_pressed(name):
 	if name=="ax_button":
 		if selectionCircle.get_current_selection() == 1:
 			var block = straightBlock.instantiate()
-			get_parent().add_child(block)
+			get_parent().add_child(block,true)
 			block.global_position=right_hand.global_position
-			block.freeze=true
+			#block.freeze=true
+		if selectionCircle.get_current_selection() == 2:
+			var block = curveLargeBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position=right_hand.global_position
+			#block.freeze=true
+			
+			
+			
 	if name=="grip_click":
 		grib_right = true
 	if name=="trigger_click":
@@ -183,7 +191,7 @@ func change_world_pos():
 
 func spawn_track(spawningTrack):
 	var newBlock = spawningTrack.instantiante()
-	get_parent().add_child(newBlock)
+	get_parent().add_child(newBlock,true)
 	newBlock.global_position = right_hand.global_position
 	newBlock.freeze = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://h267j2g0hvt8"]
+[gd_scene load_steps=9 format=3 uid="uid://h267j2g0hvt8"]
 
 [ext_resource type="PackedScene" uid="uid://cry4sssohyqn3" path="res://scenes/default_pickable_track.tscn" id="1_58jbe"]
 
@@ -68,9 +68,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ohkib")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lt38e"]
-size = Vector3(1.24674, 0.203866, 1.25325)
+size = Vector3(1.27252, 0.287718, 1.27997)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xwhek"]
+size = Vector3(0.0955459, 0.0579383, 0.538556)
 
 [node name="XRToolsPickable" instance=ExtResource("1_58jbe")]
+freeze = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -82,7 +86,7 @@ mesh = SubResource("ArrayMesh_gbas2")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(0.2, 0.000282743, 0, -0.000282743, 0.2, 0, 0, 0, 0.2, 0, 0.0210619, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0013448, 0.0268963, 0)
 shape = SubResource("BoxShape3D_lt38e")
 
 [node name="SnapPoint1" parent="." index="3"]
@@ -90,3 +94,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.124804)
 
 [node name="SnapPoint2" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.125)
+
+[node name="Area3D" type="Area3D" parent="." index="5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.25822e-05, 0.0278645, -0.00400537)
+shape = SubResource("BoxShape3D_xwhek")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
