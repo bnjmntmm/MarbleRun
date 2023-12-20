@@ -158,7 +158,8 @@ func is_xr_class(name : String) -> bool:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	freeze=true
+	if is_in_group("pickable_track"):
+		freeze=true
 	
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
