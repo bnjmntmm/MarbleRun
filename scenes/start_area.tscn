@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch3ml6w5dlljc"]
+
+[ext_resource type="Script" path="res://world/scripts/start_area.gd" id="1_v0qg6"]
+[ext_resource type="PackedScene" uid="uid://b24djh3puus84" path="res://scenes/marble.tscn" id="2_u1cii"]
+[ext_resource type="PackedScene" uid="uid://dfdr8id1k8bff" path="res://assets/kenney_marble/rampStart_solid_D.glb" id="3_o6k75"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cxagl"]
+radius = 0.055
+
+[node name="StartArea" type="Node3D"]
+script = ExtResource("1_v0qg6")
+marble = ExtResource("2_u1cii")
+
+[node name="rampStart_solid_D" parent="." instance=ExtResource("3_o6k75")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.391231, -0.0625124)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_cxagl")

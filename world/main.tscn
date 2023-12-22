@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0e6tnbfhjex"]
+[gd_scene load_steps=23 format=3 uid="uid://d0e6tnbfhjex"]
 
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="1_5imua"]
 [ext_resource type="Script" path="res://world/main.gd" id="1_icc58"]
@@ -8,13 +8,14 @@
 [ext_resource type="Material" uid="uid://dbvge3quu3bju" path="res://addons/godot-xr-tools/hands/materials/caucasian_hand.material" id="4_kd6l5"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="5_jeuif"]
 [ext_resource type="PackedScene" uid="uid://crjjptruyvyc" path="res://uistuff/ui_scene.tscn" id="6_7463b"]
-[ext_resource type="PackedScene" uid="uid://b24djh3puus84" path="res://scenes/marble.tscn" id="7_hgsbn"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="8_iakps"]
 [ext_resource type="PackedScene" uid="uid://ce7vysyvondf8" path="res://addons/godot-xr-tools/objects/snap_zone.tscn" id="9_ec8x4"]
 [ext_resource type="PackedScene" uid="uid://h267j2g0hvt8" path="res://scenes/pickable_straight_normal.tscn" id="9_gcpup"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/interactable_area.gd" id="9_tf5fs"]
 [ext_resource type="PackedScene" uid="uid://btrjs2ldd0413" path="res://scenes/pickable_curve_large.tscn" id="10_20lpn"]
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="10_x0hcj"]
+[ext_resource type="PackedScene" uid="uid://ch3ml6w5dlljc" path="res://scenes/start_area.tscn" id="13_hixt6"]
+[ext_resource type="PackedScene" uid="uid://61qbjo8x5dtg" path="res://scenes/finish_area.tscn" id="14_kn8n4"]
 
 [sub_resource type="Sky" id="Sky_old42"]
 
@@ -40,7 +41,7 @@ script = ExtResource("1_icc58")
 environment = SubResource("Environment_51nsp")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0, 0, 0)
 current = true
 script = ExtResource("2_wkmbl")
 
@@ -93,7 +94,7 @@ shape = SubResource("SphereShape3D_4xtp7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-2.56367e-08, 0.80995, -0.5865, 3.5404e-08, 0.5865, 0.80995, 1, 0, -4.37114e-08, 0, 0, 0)
 top_level = true
 collision_layer = 0
 collision_mask = 16
@@ -108,14 +109,8 @@ collision_mask = 7
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_wjshb")
 
-[node name="Marble" parent="." instance=ExtResource("7_hgsbn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31514, 0.701015, -1.64192)
-collision_mask = 196631
-mass = 0.01
-freeze = true
-enabled = false
-
 [node name="Zylinder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26182, 0, 0.359115)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Zylinder"]
 transform = Transform3D(1, 0, 0, 0, 0.403855, 0, 0, 0, 1, -1.30781, 0.182062, -1.6307)
@@ -126,28 +121,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30781, 0.182062, -1.6307)
 shape = SubResource("CylinderShape3D_pddpg")
 
 [node name="SnapZone" parent="." instance=ExtResource("9_ec8x4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.779295, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26182, 0.779295, 0.359115)
 visible = false
 snap_require = "Cube"
 
 [node name="HighlightRing" parent="SnapZone" instance=ExtResource("10_x0hcj")]
 visible = false
 
-[node name="XRToolsPickable" parent="." instance=ExtResource("9_gcpup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37504, 0.592834, -1.37779)
-enabled = false
-
-[node name="XRToolsPickable2" parent="." instance=ExtResource("9_gcpup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.42253, 0.608708, -1.83797)
-enabled = false
-
-[node name="XRToolsPickable3" parent="." instance=ExtResource("10_20lpn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.844389, 0.583308, -1.67609)
-
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.156021, 0, -0.987754, 0, 1, 0, 0.987754, 0, 0.156021, 1.07113, 1.46582, -0.378679)
 text = "TESTw"
 
+[node name="Tracks" type="Node3D" parent="."]
+
+[node name="StartArea" parent="Tracks" instance=ExtResource("13_hixt6")]
+visible = false
+
+[node name="finish_area" parent="Tracks" instance=ExtResource("14_kn8n4")]
+visible = false
+
+[node name="XRToolsPickable" parent="Tracks" instance=ExtResource("9_gcpup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11322, 0.592834, -1.01867)
+enabled = false
+
+[node name="XRToolsPickable2" parent="Tracks" instance=ExtResource("9_gcpup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16071, 0.608708, -1.47885)
+enabled = false
+
+[node name="XRToolsPickable3" parent="Tracks" instance=ExtResource("10_20lpn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417431, 0.583308, -1.31697)
+
+[connection signal="spawn_marble" from="XROrigin3D" to="Tracks/StartArea" method="_on_xr_origin_3d_spawn_marble"]
 [connection signal="button_pressed" from="XROrigin3D/Left" to="XROrigin3D" method="_on_left_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/Left" to="XROrigin3D" method="_on_left_button_released"]
 [connection signal="button_pressed" from="XROrigin3D/Right" to="XROrigin3D" method="_on_right_button_pressed"]

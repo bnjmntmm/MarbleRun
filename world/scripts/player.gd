@@ -8,6 +8,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var left_controller = $Left
 @onready var right_controller = $Right
 
+@onready var zylinder = $"../Zylinder"
+@onready var finish_area = $"../Tracks/finish_area"
+@onready var start_area = $"../Tracks/StartArea"
+signal spawn_marble
+
+
 @onready var right_hand = $Right/RightHand
 
 var grib_left = false
@@ -29,6 +35,7 @@ func _ready():
 	#VIEWPORT SELECTION CIRCLE
 	selectionCircle = viewport_2_din_3d.get_scene_instance().get_child(0).get_child(1)
 	origin_pos = marble.global_position
+	random_start_stop_position()
 	
 	pass # Replace with function body.
 
@@ -150,7 +157,8 @@ func _on_right_button_pressed(name):
 			get_parent().add_child(block,true)
 			block.global_position=right_hand.global_position
 			#block.freeze=true
-			
+	if name=="by_button":
+		spawn_marble.emit()
 			
 			
 	if name=="grip_click":
@@ -195,4 +203,28 @@ func spawn_track(spawningTrack):
 	newBlock.global_position = right_hand.global_position
 	newBlock.freeze = true
 
+func random_start_stop_position():
+	var init_pos = zylinder.global_position + Vector3(0,0.5,0)
+	var startPos : Vector3 = init_pos + Vector3(randi_range(-1,1), randf_range(0,0.3), randi_range(-1,1))
+	var endPos : Vector3 = init_pos + Vector3(randi_range(-1,1), randf_range(-1,0), randi_range(-1,1))
+	
+	while startPos.distance_to(endPos) < 1.5:
+		startPos= init_pos + Vector3(randi_range(-1,1), randf_range(0,0.3), randi_range(-1,1))
+		endPos = init_pos +Vector3(randi_range(-1,1), randf_range(-1,0 ), randi_range(-1,1))
+		
+		
+
+	start_area.global_position = startPos
+	finish_area.global_position = endPos
+	
+	start_area.look_at(endPos,Vector3(0,1,0),true)
+	#start_area.global_rotation = Vector3(0,start_area.global_rotation.y,0)
+	finish_area.look_at(startPos,Vector3(0,1,0),true)
+	
+	finish_area.rotation = Vector3(0,finish_area.rotation.y,0)
+	start_area.rotation = Vector3(0,start_area.rotation.y,0)
+	#finish_area.global_rotation = Vector3(0,finish_area.global_rotation.y,0)
+	
+	start_area.visible = true
+	finish_area.visible = true
 
