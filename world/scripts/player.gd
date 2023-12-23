@@ -5,12 +5,17 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var marble = $"../Marble"
 @onready var viewport_2_din_3d = $Left/Viewport2Din3D
 @onready var label_3d = $XRCamera3D/Label3D
+@onready var label_floating = $"../Label3D"
+
 @onready var left_controller = $Left
 @onready var right_controller = $Right
 
 @onready var zylinder = $"../Zylinder"
+
 @onready var finish_area = $"../Tracks/finish_area"
 @onready var start_area = $"../Tracks/StartArea"
+
+
 signal spawn_marble
 
 
@@ -34,10 +39,7 @@ var origin_pos
 func _ready():
 	#VIEWPORT SELECTION CIRCLE
 	selectionCircle = viewport_2_din_3d.get_scene_instance().get_child(0).get_child(1)
-	origin_pos = marble.global_position
 	random_start_stop_position()
-	
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -204,13 +206,15 @@ func spawn_track(spawningTrack):
 	newBlock.freeze = true
 
 func random_start_stop_position():
+	start_area.visible = true
+	finish_area.visible = true
 	var init_pos = zylinder.global_position + Vector3(0,0.5,0)
-	var startPos : Vector3 = init_pos + Vector3(randi_range(-1,1), randf_range(0,0.3), randi_range(-1,1))
-	var endPos : Vector3 = init_pos + Vector3(randi_range(-1,1), randf_range(-1,0), randi_range(-1,1))
+	var startPos : Vector3 = init_pos + Vector3(randi_range(-1.5,1.5), randf_range(0,0.3), randi_range(-1.5,1.5))
+	var endPos : Vector3 = init_pos + Vector3(randi_range(-1.5,1.5), randf_range(-0.5,0), randi_range(-1.5,1.5))
 	
 	while startPos.distance_to(endPos) < 1.5:
-		startPos= init_pos + Vector3(randi_range(-1,1), randf_range(0,0.3), randi_range(-1,1))
-		endPos = init_pos +Vector3(randi_range(-1,1), randf_range(-1,0 ), randi_range(-1,1))
+		startPos= init_pos + Vector3(randi_range(-1.5,1.5), randf_range(0,0.3), randi_range(-1.5,1.5))
+		endPos = init_pos + Vector3(randi_range(-1.5,1.5), randf_range(-0.5,0), randi_range(-1.5,1.5))
 		
 		
 
@@ -225,6 +229,9 @@ func random_start_stop_position():
 	start_area.rotation = Vector3(0,start_area.rotation.y,0)
 	#finish_area.global_rotation = Vector3(0,finish_area.global_rotation.y,0)
 	
-	start_area.visible = true
-	finish_area.visible = true
+	
 
+
+
+func _on_finish_area_marble_in_fin():
+	label_floating.text = str("You brought the Marble to its Finish with a Score of: " + str(GameManager.final_score))

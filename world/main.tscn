@@ -102,7 +102,7 @@ script = ExtResource("8_iakps")
 push_rigid_bodies = false
 
 [node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250729, 0)
 collision_layer = 16
 collision_mask = 7
 
@@ -110,18 +110,18 @@ collision_mask = 7
 shape = SubResource("BoxShape3D_wjshb")
 
 [node name="Zylinder" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26182, 0, 0.359115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00798237, 0.230292, -1.21187)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Zylinder"]
-transform = Transform3D(1, 0, 0, 0, 0.403855, 0, 0, 0, 1, -1.30781, 0.182062, -1.6307)
+transform = Transform3D(1, 0, 0, 0, 0.403855, 0, 0, 0, 1, 0, 0.182062, 0)
 mesh = SubResource("CylinderMesh_xuivp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Zylinder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30781, 0.182062, -1.6307)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.182062, 0)
 shape = SubResource("CylinderShape3D_pddpg")
 
 [node name="SnapZone" parent="." instance=ExtResource("9_ec8x4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26182, 0.779295, 0.359115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26182, 1.00959, 0.359115)
 visible = false
 snap_require = "Cube"
 
@@ -133,6 +133,7 @@ transform = Transform3D(0.156021, 0, -0.987754, 0, 1, 0, 0.987754, 0, 0.156021, 
 text = "TESTw"
 
 [node name="Tracks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230292, 0)
 
 [node name="StartArea" parent="Tracks" instance=ExtResource("13_hixt6")]
 visible = false
@@ -156,3 +157,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417431, 0.583308, -1.31697)
 [connection signal="button_released" from="XROrigin3D/Left" to="XROrigin3D" method="_on_left_button_released"]
 [connection signal="button_pressed" from="XROrigin3D/Right" to="XROrigin3D" method="_on_right_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/Right" to="XROrigin3D" method="_on_right_button_released"]
+[connection signal="marble_in_fin" from="Tracks/finish_area" to="XROrigin3D" method="_on_finish_area_marble_in_fin"]
