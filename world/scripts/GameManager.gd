@@ -1,10 +1,22 @@
 extends Node
 
-signal changeArea
-signal spawnBlock
 
 var playAreaMin : Vector3
 var playAreaMax: Vector3
+
+var XPlaneValue
+var ZPlaneValue
+var PlaneOrigin
+
+
+signal submitArea
+
+signal xAdd
+signal xMinus
+
+signal yAdd
+signal yMinus
+
 
 
 
@@ -22,9 +34,14 @@ func calculateScore():
 	var score: float = roundf(abs(passed_through_tracks * (passed_through_tracks/elapsedTime) +  elapsedTime*(passed_through_tracks/elapsedTime)))
 	final_score = score
 
+func addXValue():
+	xAdd.emit()
+func addYValue():
+	yAdd.emit()
+func subtractXValue():
+	xMinus.emit()
+func subtractYValue():
+	yMinus.emit()
 
-func changeAreaFunc():
-	changeArea.emit()
-
-func spawn_block():
-	spawnBlock.emit()
+func apply_area():
+	submitArea.emit()

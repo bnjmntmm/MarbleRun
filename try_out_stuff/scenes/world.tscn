@@ -41,13 +41,13 @@ tracker = &"left_hand"
 
 [node name="FunctionPickup" parent="XROrigin3D/LeftController" instance=ExtResource("3_6s2h2")]
 
-[node name="Viewport2Din3D" parent="XROrigin3D/LeftController" instance=ExtResource("4_m37fl")]
+[node name="AreaSetupViewport" parent="XROrigin3D/LeftController" instance=ExtResource("4_m37fl")]
 transform = Transform3D(0.192472, -0.0285809, 0.0631361, 0, 0.112502, 0.217155, -0.0543553, -0.101205, 0.223565, -0.0794103, 0.142461, -0.149324)
 visible = false
 screen_size = Vector2(2, 2)
 collision_layer = 5242880
 scene = ExtResource("5_a30y3")
-viewport_size = Vector2(300, 300)
+viewport_size = Vector2(1280, 720)
 unshaded = true
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
@@ -82,19 +82,10 @@ shape = SubResource("BoxShape3D_608ln")
 script = ExtResource("5_wmlgu")
 
 [node name="Area_Init_Box" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.247288, 0, 0)
-
-[node name="Area_Init_Box2" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.251413)
-
-[node name="Area_Init_Box3" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.376779, 0, 0)
-
-[node name="Area_Init_Box4" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.276398)
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19922, -3.81113)
 billboard = 1
 
 [connection signal="button_pressed" from="XROrigin3D/LeftController" to="XROrigin3D" method="_on_left_controller_button_pressed"]
+[connection signal="button_pressed" from="XROrigin3D/RightController" to="XROrigin3D" method="_on_right_controller_button_pressed"]

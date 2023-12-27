@@ -1,6 +1,6 @@
 extends XROrigin3D
 
-@onready var viewport_2_din_3d = $LeftController/Viewport2Din3D
+@onready var AreaSetupViewport = $LeftController/AreaSetupViewport
 var cube = preload("res://try_out_stuff/scenes/cube.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +15,8 @@ func _process(delta):
 
 func _on_left_controller_button_pressed(name):
 	if name == "ax_button":
-		viewport_2_din_3d.visible = !viewport_2_din_3d.visible
+		AreaSetupViewport.visible = !AreaSetupViewport.visible
+
 
 func spawn_block():
 	var cubeNew = cube.instantiate()
@@ -23,7 +24,13 @@ func spawn_block():
 	randomize()
 	var randPos = Vector3(
 		lerp(GameManager.playAreaMin.x, GameManager.playAreaMax.x, randf()),
-		lerp(GameManager.playAreaMin.y, GameManager.playAreaMax.y, randf()),
+		0,
 		lerp(GameManager.playAreaMin.z, GameManager.playAreaMax.z, randf())
 	)
-	cubeNew.global_transform.origin = randPos
+	cubeNew.global_position = randPos
+	#cubeNew.get_child(2).text = str(randPos)
+
+
+func _on_right_controller_button_pressed(name):
+	if name == "ax_button":
+		spawn_block()

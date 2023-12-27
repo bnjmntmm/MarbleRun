@@ -1,31 +1,59 @@
 extends Node
-
-var InitChildren = []
 @onready var label_3d = $"../Label3D"
+@onready var area_init_box := $Area_Init_Box
 
-@onready var area_init_box = $Area_Init_Box
-@onready var area_init_box_2 = $Area_Init_Box2
-@onready var area_init_box_3 = $Area_Init_Box3
-@onready var area_init_box_4 = $Area_Init_Box4
-
-
-
-
+@onready var area_setup_viewport = $"../XROrigin3D/LeftController/AreaSetupViewport"
 
 
 func _ready():
-	GameManager.connect("changeArea", area_changed)
+	GameManager.connect("xAdd", addXToMesh)
+	GameManager.connect("yAdd", addYToMesh)
+	GameManager.connect("xMinus", substractXFromMesh)
+	GameManager.connect("yMinus", substractYFromMesh)
+	GameManager.connect("submitArea",area_changed)
+	GameManager.XPlaneValue = area_init_box.get_child(0).get_shape().get_size().x
+	GameManager.YPlaneValue = area_init_box.get_child(0).get_shape().get_size().y
+	
+
+	
+	
+func _process(delta):
+	pass
+	
+func addXToMesh():
+	area_init_box.get_child(0).get_shape().size.x = area_init_box.get_child(0).get_shape().get_size().x + 0.1
+	area_init_box.get_child(1).get_mesh().size.x = area_init_box.get_child(1).get_mesh().size.x + 0.1
+func substractXFromMesh():
+	if area_init_box.get_child(0).get_shape().size.x < 0.1:
+		return
+	else:
+		area_init_box.get_child(0).get_shape().size.x = area_init_box.get_child(0).get_shape().get_size().x - 0.1
+		area_init_box.get_child(1).get_mesh().size.x = area_init_box.get_child(1).get_mesh().size.x - 0.1
+func addYToMesh():
+	area_init_box.get_child(0).get_shape().size.z = area_init_box.get_child(0).get_shape().get_size().z + 0.1
+	area_init_box.get_child(1).get_mesh().size.z = area_init_box.get_child(1).get_mesh().size.z + 0.1
+func substractYFromMesh():
+	if area_init_box.get_child(0).get_shape().size.z < 0.1:
+		return
+	else:
+		area_init_box.get_child(0).get_shape().size.z = area_init_box.get_child(0).get_shape().get_size().z - 0.1
+		area_init_box.get_child(1).get_mesh().size.z = area_init_box.get_child(1).get_mesh().size.z - 0.1
+
 
 func area_changed():
-	GameManager.playAreaMin = Vector3(
-		min(area_init_box.global_transform.origin.x,area_init_box_2.global_transform.origin.x,area_init_box_3.global_transform.origin.x,area_init_box_4.global_transform.origin.x),
-		min(area_init_box.global_transform.origin.y,area_init_box_2.global_transform.origin.y,area_init_box_3.global_transform.origin.y,area_init_box_4.global_transform.origin.y),
-		min(area_init_box.global_transform.origin.z,area_init_box_2.global_transform.origin.z,area_init_box_3.global_transform.origin.z,area_init_box_4.global_transform.origin.z)	
-	)
-	GameManager.playAreaMax = Vector3(
-		max(area_init_box.global_transform.origin.x,area_init_box_2.global_transform.origin.x,area_init_box_3.global_transform.origin.x,area_init_box_4.global_transform.origin.x),
-		max(area_init_box.global_transform.origin.y,area_init_box_2.global_transform.origin.y,area_init_box_3.global_transform.origin.y,area_init_box_4.global_transform.origin.y),
-		max(area_init_box.global_transform.origin.z,area_init_box_2.global_transform.origin.z,area_init_box_3.global_transform.origin.z,area_init_box_4.global_transform.origin.z)	
-	)
-	#label_3d.text = "min: " + str(GameManager.playAreaMin) + " ; max: " + str(GameManager.playAreaMax)
+	
+	GameManager.XPlaneValue = area_init_box.get_child(0).get_shape().size.x
+	GameManager.ZPlaneValue = area_init_box.get_child(0).get_shape().size.z
+	GameManager.PlaneOrigin = area_init_box.transform.origin
+	#label_3d.text = "Transform: " + str(area_init_box.transform.origin) +  "XPLane: " + str(GameManager.XPlaneValue) + "\n YPlane: " + str(GameManager.ZPlaneValue)
+	var minX = GameManager.PlaneOrigin.x - (GameManager.XPlaneValue/2)
+	var minZ = GameManager.PlaneOrigin.z - (GameManager.ZPlaneValue/2)
 
+	var maxX = GameManager.PlaneOrigin.x + (GameManager.XPlaneValue/2)
+	var maxZ = GameManager.PlaneOrigin.z + (GameManager.ZPlaneValue/2)
+
+	GameManager.playAreaMin = Vector3(minX,0,minZ)
+	GameManager.playAreaMax = Vector3(maxX,0,maxZ)
+	area_setup_viewport.enabled = false
+	area_setup_viewport.visible = false
+	area_init_box.visible = false

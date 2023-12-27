@@ -12,6 +12,8 @@ script = ExtResource("1_28y37")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -21,21 +23,74 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 56
+text = "PLAY AREA SETUP:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
+
+[node name="XAdd" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ajidj")
-text = "CALIBRATE FLOOR"
+text = "X +"
 
-[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="YAdd" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
+text = "Y +"
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="XMinus" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ajidj")
+text = "X  -"
+
+[node name="YMinus" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
+text = "Y  -"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "SPAWN Block"
+size_flags_stretch_ratio = 0.42
 
-[connection signal="button_down" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_button_down"]
-[connection signal="button_down" from="MarginContainer/VBoxContainer/Button2" to="." method="_on_button_2_button_down"]
+[node name="Apply_Area" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
+text = "SET AREA"
+
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/XAdd" to="." method="_on_x_add_button_down"]
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/YAdd" to="." method="_on_y_add_button_down"]
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer2/XMinus" to="." method="_on_x_minus_button_down"]
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer2/YMinus" to="." method="_on_y_minus_button_down"]
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer3/Apply_Area" to="." method="_on_apply_area_button_down"]

@@ -4,7 +4,7 @@
 size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3el3k"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.2, 0.2, 0.2)
 
 [node name="Cube" type="StaticBody3D"]
 collision_layer = 0
