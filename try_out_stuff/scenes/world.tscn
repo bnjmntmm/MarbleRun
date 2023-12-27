@@ -1,0 +1,100 @@
+[gd_scene load_steps=14 format=3 uid="uid://cbjk5ig1k7cbu"]
+
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_0q3jd"]
+[ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="2_i0wsy"]
+[ext_resource type="Script" path="res://try_out_stuff/scripts/player.gd" id="2_wkw3m"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_6s2h2"]
+[ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="3_ix8x3"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="4_m37fl"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="4_oviv3"]
+[ext_resource type="PackedScene" uid="uid://d32dp4ac52fcx" path="res://try_out_stuff/scenes/canvas_layer.tscn" id="5_a30y3"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="5_p1wvd"]
+[ext_resource type="Script" path="res://try_out_stuff/scripts/Play_Area_Init.gd" id="5_wmlgu"]
+[ext_resource type="PackedScene" uid="uid://b83vgfmlq1fw5" path="res://try_out_stuff/scenes/area_init_box.tscn" id="6_ik4ro"]
+
+[sub_resource type="Environment" id="Environment_ccmvf"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_608ln"]
+size = Vector3(20, 1, 20)
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ccmvf")
+
+[node name="StartXR" parent="." instance=ExtResource("1_0q3jd")]
+enable_passthrough = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+script = ExtResource("2_wkw3m")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="XROrigin3D/LeftController" instance=ExtResource("2_i0wsy")]
+
+[node name="FunctionPickup" parent="XROrigin3D/LeftController" instance=ExtResource("3_6s2h2")]
+
+[node name="Viewport2Din3D" parent="XROrigin3D/LeftController" instance=ExtResource("4_m37fl")]
+transform = Transform3D(0.192472, -0.0285809, 0.0631361, 0, 0.112502, 0.217155, -0.0543553, -0.101205, 0.223565, -0.0794103, 0.142461, -0.149324)
+visible = false
+screen_size = Vector2(2, 2)
+collision_layer = 5242880
+scene = ExtResource("5_a30y3")
+viewport_size = Vector2(300, 300)
+unshaded = true
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+tracker = &"right_hand"
+
+[node name="RightHand" parent="XROrigin3D/RightController" instance=ExtResource("3_ix8x3")]
+
+[node name="FunctionPickup" parent="XROrigin3D/RightController" instance=ExtResource("3_6s2h2")]
+
+[node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D"]
+top_level = true
+collision_layer = 524288
+script = ExtResource("4_oviv3")
+
+[node name="FunctionPointer" parent="XROrigin3D" instance=ExtResource("5_p1wvd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+distance = 2.0
+show_laser = 2
+laser_length = 1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.415328, 0.909672, 0, -0.909672, 0.415328, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_608ln")
+
+[node name="Play_Area_Init" type="Node" parent="."]
+script = ExtResource("5_wmlgu")
+
+[node name="Area_Init_Box" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.247288, 0, 0)
+
+[node name="Area_Init_Box2" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.251413)
+
+[node name="Area_Init_Box3" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.376779, 0, 0)
+
+[node name="Area_Init_Box4" parent="Play_Area_Init" instance=ExtResource("6_ik4ro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.276398)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19922, -3.81113)
+billboard = 1
+
+[connection signal="button_pressed" from="XROrigin3D/LeftController" to="XROrigin3D" method="_on_left_controller_button_pressed"]

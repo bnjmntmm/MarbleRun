@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d0e6tnbfhjex"]
+[gd_scene load_steps=24 format=3 uid="uid://d0e6tnbfhjex"]
 
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="1_5imua"]
 [ext_resource type="Script" path="res://world/main.gd" id="1_icc58"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="10_x0hcj"]
 [ext_resource type="PackedScene" uid="uid://ch3ml6w5dlljc" path="res://scenes/start_area.tscn" id="13_hixt6"]
 [ext_resource type="PackedScene" uid="uid://61qbjo8x5dtg" path="res://scenes/finish_area.tscn" id="14_kn8n4"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="17_5s0ci"]
 
 [sub_resource type="Sky" id="Sky_old42"]
 
@@ -27,7 +28,7 @@ sky = SubResource("Sky_old42")
 radius = 0.074167
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wjshb"]
-size = Vector3(24, 0.5, 22)
+size = Vector3(100, 0.5, 100)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xuivp"]
 
@@ -151,6 +152,9 @@ enabled = false
 
 [node name="XRToolsPickable3" parent="Tracks" instance=ExtResource("10_20lpn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417431, 0.583308, -1.31697)
+
+[node name="StartXR" parent="." instance=ExtResource("17_5s0ci")]
+enable_passthrough = true
 
 [connection signal="spawn_marble" from="XROrigin3D" to="Tracks/StartArea" method="_on_xr_origin_3d_spawn_marble"]
 [connection signal="button_pressed" from="XROrigin3D/Left" to="XROrigin3D" method="_on_left_button_pressed"]
