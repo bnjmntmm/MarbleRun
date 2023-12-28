@@ -74,6 +74,7 @@ data = PackedVector3Array(0.5, 0.5, 0.5, 0.35, 0.5, 0.5, 0.35, 0.5, -0.5, 0.35, 
 size = Vector3(1, 0.5, 0)
 
 [node name="PickableObject" groups=["pickable_track"] instance=ExtResource("1_kjfh7")]
+freeze = true
 
 [node name="straight2" type="MeshInstance3D" parent="." index="0"]
 mesh = SubResource("ArrayMesh_gbas2")
@@ -84,6 +85,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00835371, 0.246514, 0.00559
 shape = SubResource("BoxShape3D_4f2nd")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="." index="2"]
+collision_mask = 33
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" index="0"]
 shape = SubResource("ConcavePolygonShape3D_2ptni")

@@ -10,6 +10,7 @@ var PlaneOrigin
 
 
 signal submitArea
+signal complete
 
 signal xAdd
 signal xMinus
@@ -45,3 +46,6 @@ func subtractYValue():
 
 func apply_area():
 	submitArea.emit()
+	
+func setupComplete():
+	complete.emit()

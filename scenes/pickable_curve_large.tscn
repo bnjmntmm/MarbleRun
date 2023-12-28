@@ -74,6 +74,7 @@ data = PackedVector3Array(0.052418, 0.25, -0.66646, -0.0519749, 0.3125, -0.82269
 size = Vector3(0.343629, 0.131961, 0.68093)
 
 [node name="XRToolsPickable" instance=ExtResource("1_l0bhi")]
+collision_mask = 39
 freeze = true
 enabled = false
 

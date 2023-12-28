@@ -48,6 +48,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 90
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ajidj")
+action_mode = 0
 text = "X +"
 
 [node name="YAdd" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
@@ -55,6 +56,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 90
+action_mode = 0
 text = "Y +"
 
 [node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -69,6 +71,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 90
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ajidj")
+action_mode = 0
 text = "X  -"
 
 [node name="YMinus" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
@@ -76,6 +79,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 90
+action_mode = 0
 text = "Y  -"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -89,8 +93,12 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 90
 text = "SET AREA"
 
-[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/XAdd" to="." method="_on_x_add_button_down"]
-[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/YAdd" to="." method="_on_y_add_button_down"]
-[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer2/XMinus" to="." method="_on_x_minus_button_down"]
-[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer2/YMinus" to="." method="_on_y_minus_button_down"]
+[connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer/XAdd" to="." method="_on_x_add_button_up"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/XAdd" to="." method="_on_x_add_pressed"]
+[connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer/YAdd" to="." method="_on_y_add_button_up"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/YAdd" to="." method="_on_y_add_pressed"]
+[connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer2/XMinus" to="." method="_on_x_minus_button_up"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/XMinus" to="." method="_on_x_minus_pressed"]
+[connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer2/YMinus" to="." method="_on_y_minus_button_up"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/YMinus" to="." method="_on_y_minus_pressed"]
 [connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer3/Apply_Area" to="." method="_on_apply_area_button_down"]

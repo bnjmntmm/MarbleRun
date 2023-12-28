@@ -4,6 +4,7 @@ extends Node
 
 @onready var area_setup_viewport = $"../XROrigin3D/LeftController/AreaSetupViewport"
 
+signal setupComplete
 
 func _ready():
 	GameManager.connect("xAdd", addXToMesh)
@@ -11,9 +12,7 @@ func _ready():
 	GameManager.connect("xMinus", substractXFromMesh)
 	GameManager.connect("yMinus", substractYFromMesh)
 	GameManager.connect("submitArea",area_changed)
-	GameManager.XPlaneValue = area_init_box.get_child(0).get_shape().get_size().x
-	GameManager.YPlaneValue = area_init_box.get_child(0).get_shape().get_size().y
-	
+
 
 	
 	
@@ -57,3 +56,4 @@ func area_changed():
 	area_setup_viewport.enabled = false
 	area_setup_viewport.visible = false
 	area_init_box.visible = false
+	GameManager.setupComplete()

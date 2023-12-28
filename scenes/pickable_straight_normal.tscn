@@ -75,6 +75,7 @@ size = Vector3(1.27252, 0.287718, 1.27997)
 size = Vector3(0.0955459, 0.0579383, 0.538556)
 
 [node name="XRToolsPickable" instance=ExtResource("1_58jbe")]
+collision_mask = 39
 freeze = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
@@ -104,6 +105,7 @@ shape = SubResource("BoxShape3D_xwhek")
 
 [node name="ScoringCollider" parent="." index="6" instance=ExtResource("2_h8tpu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.130459, 0)
+collision_mask = 32
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

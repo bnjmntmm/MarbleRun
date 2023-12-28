@@ -20,7 +20,11 @@ height = 0.1
 albedo_texture = ExtResource("2_a8b6e")
 
 [node name="Marble" instance=ExtResource("1_q3r6x")]
+collision_layer = 32
+collision_mask = 21
 physics_material_override = SubResource("PhysicsMaterial_jjvvq")
+enabled = false
+press_to_hold = false
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("SphereShape3D_gphyj")
@@ -28,3 +32,7 @@ shape = SubResource("SphereShape3D_gphyj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 mesh = SubResource("SphereMesh_5b1b8")
 surface_material_override/0 = SubResource("StandardMaterial3D_wjhqa")
+
+[node name="Label3D" type="Label3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.105634, 0)
+billboard = 1
