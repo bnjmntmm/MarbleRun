@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://61qbjo8x5dtg"]
+[gd_scene load_steps=9 format=3 uid="uid://61qbjo8x5dtg"]
 
 [ext_resource type="Script" path="res://world/scripts/finish_area.gd" id="1_pnc24"]
+[ext_resource type="PackedScene" uid="uid://grsmv5olnhoi" path="res://confetti/confetti_alt.tscn" id="2_ibwe1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qghd3"]
 resource_name = "yellow"
@@ -72,6 +73,9 @@ size = Vector3(0.437, 0.07, 0.544)
 
 [node name="finish_area" type="Node3D"]
 script = ExtResource("1_pnc24")
+
+[node name="ConfettiAlt" parent="." instance=ExtResource("2_ibwe1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0455901, 0)
 
 [node name="end_rounded" type="Node3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

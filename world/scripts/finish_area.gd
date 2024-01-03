@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var confetti_alt = $ConfettiAlt
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,4 +19,5 @@ func _on_area_3d_body_entered(body):
 		if body.name == "Marble":
 			GameManager.end_time = Time.get_unix_time_from_system()
 			GameManager.calculateScore()
+			confetti_alt.play_confetti()
 			marble_in_fin.emit()
