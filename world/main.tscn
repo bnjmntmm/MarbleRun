@@ -47,7 +47,8 @@ current = true
 script = ExtResource("2_wkmbl")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5248, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3248, 0)
+cull_mask = 524287
 current = true
 
 [node name="Neck" type="Node3D" parent="XROrigin3D/XRCamera3D"]
@@ -65,14 +66,17 @@ tracker = &"left_hand"
 hand_material_override = ExtResource("4_kd6l5")
 
 [node name="FunctionPickup" parent="XROrigin3D/Left" instance=ExtResource("3_dk5kd")]
+ranged_enable = false
 
 [node name="Viewport2Din3D" parent="XROrigin3D/Left" instance=ExtResource("5_jeuif")]
 transform = Transform3D(0.199991, 0.000600229, -0.00180152, 0, 0.189745, 0.0632192, 0.00189888, -0.0632164, 0.189737, -0.00881559, 0.102512, -0.100335)
 visible = false
 screen_size = Vector2(4, 3)
 enabled = false
+collision_layer = 5242880
 scene = ExtResource("6_7463b")
 viewport_size = Vector2(800, 600)
+unshaded = true
 
 [node name="Right" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.501137, 0.881791, 0)
@@ -82,6 +86,7 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("4_kd6l5")
 
 [node name="FunctionPickup" parent="XROrigin3D/Right" instance=ExtResource("3_dk5kd")]
+ranged_enable = false
 
 [node name="right_hand_area" type="Area3D" parent="XROrigin3D/Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100834, 0.00461805, -0.00138712)
@@ -95,11 +100,11 @@ shape = SubResource("SphereShape3D_4xtp7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D"]
-transform = Transform3D(-2.56367e-08, 0.80995, -0.5865, 3.5404e-08, 0.5865, 0.80995, 1, 0, -4.37114e-08, 0, 0, 0)
 top_level = true
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("8_iakps")
+player_height_max = 2.0
 push_rigid_bodies = false
 
 [node name="Floor" type="StaticBody3D" parent="."]
