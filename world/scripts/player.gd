@@ -5,8 +5,19 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var marble = $"../Marble"
 @onready var viewport_2_din_3d = $Left/Viewport2Din3D
 @onready var label_3d = $XRCamera3D/Label3D
+@onready var label_floating = $"../Label3D"
+
 @onready var left_controller = $Left
 @onready var right_controller = $Right
+
+@onready var zylinder = $"../Zylinder"
+
+@onready var finish_area = $"../Tracks/finish_area"
+@onready var start_area = $"../Tracks/StartArea"
+
+
+signal spawn_marble
+
 
 @onready var right_hand = $Right/RightHand
 
@@ -19,7 +30,7 @@ var init_controller_pos : Vector3
 
 ## MARBLE TRACKS INIT
 var straightBlock = ResourceLoader.load("res://scenes/pickable_straight_normal.tscn")
-var curveLargeBlock = preload("res://scenes/pickable_curve_large.tscn")
+var curveLargeBlock = ResourceLoader.load("res://scenes/pickable_curve_large.tscn")
 var selectionCircle
 
 var origin_pos
@@ -28,9 +39,7 @@ var origin_pos
 func _ready():
 	#VIEWPORT SELECTION CIRCLE
 	selectionCircle = viewport_2_din_3d.get_scene_instance().get_child(0).get_child(1)
-	origin_pos = marble.global_position
-	
-	pass # Replace with function body.
+	random_start_stop_position()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,7 +53,7 @@ func _physics_process(delta):
 	if !is_colliding:
 		_process_rotation_on_input(delta)
 		_process_movement_on_input(delta)
-	change_world_pos()
+	#change_world_pos()
 
 func _process_on_physical_movement(delta):
 	#current velocity
@@ -142,9 +151,18 @@ func _on_right_button_pressed(name):
 	if name=="ax_button":
 		if selectionCircle.get_current_selection() == 1:
 			var block = straightBlock.instantiate()
-			get_parent().add_child(block)
+			get_parent().add_child(block,true)
 			block.global_position=right_hand.global_position
-			block.freeze=true
+			#block.freeze=true
+		if selectionCircle.get_current_selection() == 2:
+			var block = curveLargeBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position=right_hand.global_position
+			#block.freeze=true
+	if name=="by_button":
+		spawn_marble.emit()
+			
+			
 	if name=="grip_click":
 		grib_right = true
 	if name=="trigger_click":
@@ -183,8 +201,37 @@ func change_world_pos():
 
 func spawn_track(spawningTrack):
 	var newBlock = spawningTrack.instantiante()
-	get_parent().add_child(newBlock)
+	get_parent().add_child(newBlock,true)
 	newBlock.global_position = right_hand.global_position
 	newBlock.freeze = true
 
+func random_start_stop_position():
+	start_area.visible = true
+	finish_area.visible = true
+	var init_pos = zylinder.global_position + Vector3(0,0.5,0)
+	var startPos : Vector3 = init_pos + Vector3(randi_range(-1.5,1.5), randf_range(0,0.3), randi_range(-1.5,1.5))
+	var endPos : Vector3 = init_pos + Vector3(randi_range(-1.5,1.5), randf_range(-0.5,0), randi_range(-1.5,1.5))
+	
+	while startPos.distance_to(endPos) < 1.5:
+		startPos= init_pos + Vector3(randi_range(-1.5,1.5), randf_range(0,0.3), randi_range(-1.5,1.5))
+		endPos = init_pos + Vector3(randi_range(-1.5,1.5), randf_range(-0.5,0), randi_range(-1.5,1.5))
+		
+		
 
+	start_area.global_position = startPos
+	finish_area.global_position = endPos
+	
+	start_area.look_at(endPos,Vector3(0,1,0),true)
+	#start_area.global_rotation = Vector3(0,start_area.global_rotation.y,0)
+	finish_area.look_at(startPos,Vector3(0,1,0),true)
+	
+	finish_area.rotation = Vector3(0,finish_area.rotation.y,0)
+	start_area.rotation = Vector3(0,start_area.rotation.y,0)
+	#finish_area.global_rotation = Vector3(0,finish_area.global_rotation.y,0)
+	
+	
+
+
+
+func _on_finish_area_marble_in_fin():
+	label_floating.text = str("You brought the Marble to its Finish with a Score of: " + str(GameManager.final_score))

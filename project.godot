@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Mixed Reality"
-run/main_scene="res://world/main.tscn"
+run/main_scene="res://try_out_stuff/scenes/world.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
-Methods="*res://scripts/Methods.gd"
+GameManager="*res://world/scripts/GameManager.gd"
 
 [editor_plugins]
 
@@ -38,6 +38,8 @@ block_select={
 3d_physics/layer_2="Dynamic World"
 3d_physics/layer_3="Pickable Objects"
 3d_physics/layer_4="Wall Walking Surfaces"
+3d_physics/layer_5="Floor"
+3d_physics/layer_6="Marble"
 3d_physics/layer_17="Held Objects"
 3d_physics/layer_18="Player Hand"
 3d_physics/layer_20="Player Body"

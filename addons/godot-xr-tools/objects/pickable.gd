@@ -6,6 +6,8 @@ extends RigidBody3D
 var snap_radius = 0.1
 var is_snapped = false
 var local_snap_points = ["SnapPoint1", "SnapPoint2"]  # Names of the snap points on this piece
+var is_active_piece:bool
+
 
 
 
@@ -155,6 +157,10 @@ func is_xr_class(name : String) -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	if is_in_group("pickable_track"):
+		freeze=true
+	
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
 	
@@ -483,10 +489,8 @@ func _set_ranged_grab_method(new_value: int) -> void:
 	can_ranged_grab = new_value != RangedMethod.NONE
 
 		
-func _process(delta):
+func _physics_process(delta):
 	if self.is_in_group("pickable_track"):
-		if is_snapped:
-			return
 		var nearest_snap_point_data = get_nearest_snap_point()
 		if nearest_snap_point_data != null:
 			snap_to(nearest_snap_point_data)
@@ -510,27 +514,63 @@ func get_nearest_snap_point():
 	return nearest_snap_point_data if nearest_snap_point_data else null
 		
 func snap_to(snap_point_data: Dictionary):
+	
+		
 	var target_snap_point = snap_point_data["target_snap_point"]
 	var local_snap_point = snap_point_data["local_snap_point"]
+			
 
 	var local_snap_point_global = local_snap_point.global_transform.origin
 	var target_snap_point_global = target_snap_point.global_transform.origin
 
 	var new_global_position = global_transform.origin + target_snap_point_global - local_snap_point_global
+	
+		
+		
 	global_transform.origin = new_global_position
+	#global_rotation=target_snap_point.global_rotation
 
-   
-	global_transform.basis = target_snap_point.get_parent().global_transform.basis
-	#global_transform.basis.x = target_snap_point.get_parent().global_transform.basis.x
+	
+#	if is_active_piece:
+#		target_snap_point.get_parent().enabled=false	
+		#is_snapped=true
+	
+		#global_transform.basis.x = target_snap_point.get_parent().global_transform.basis.x
+		#target_snap_point.get_parent().enabled=false
+		
+		
 
 	#is_snapped = true	
 func _on_dropped(pickable):
 	if pickable.is_in_group("pickable_track"):
-		self.freeze=true
 		pickable.rotation = Vector3(0,pickable.rotation.y,0)
+		pickable.is_active_piece=false
+		
+		
+			
+		#if is_snapped:
+			#self.enabled=false
+		
 		#pickable.freeze=true	
 func _on_picked_up(pickable):
 	if pickable.is_in_group("pickable_track"):
-		pass
+		pickable.is_active_piece=true
+			
 		
-	
+		
+
+
+func _on_area_3d_area_entered(area):
+	if area.name=="right_hand_area":
+		if !is_active_piece:
+			self.enabled=true
+
+
+
+func _on_area_3d_area_exited(area):
+	if area.name=="right_hand_area":
+		
+		if !is_active_piece:
+			self.enabled=false
+		
+
