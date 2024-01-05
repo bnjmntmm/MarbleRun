@@ -503,6 +503,7 @@ func get_nearest_snap_point():
 		if track_piece==self:
 			continue
 		for snap_point in track_piece.get_children():
+				
 			if "SnapPoint" in snap_point.name:
 				for local_snap_point_name in local_snap_points:
 					var local_snap_point = self.get_node(local_snap_point_name)
@@ -510,6 +511,7 @@ func get_nearest_snap_point():
 					if distance < min_distance:
 						min_distance = distance
 						nearest_snap_point_data = {"target_snap_point": snap_point, "local_snap_point": local_snap_point}
+			
 				
 	return nearest_snap_point_data if nearest_snap_point_data else null
 		

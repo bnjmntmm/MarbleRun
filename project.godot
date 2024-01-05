@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 GameManager="*res://world/scripts/GameManager.gd"
+PrintAdb="*res://world/scripts/print_adb.gd"
 
 [editor_plugins]
 
@@ -53,7 +54,8 @@ jolt_3d/sleep/enabled=false
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 
 [xr]

@@ -11,6 +11,11 @@ var cube = preload("res://try_out_stuff/scenes/cube.tscn")
 ## MARBLE TRACKS INIT
 var straightBlock = ResourceLoader.load("res://scenes/pickable_straight_normal.tscn")
 var curveLargeBlock = ResourceLoader.load("res://scenes/pickable_curve_large.tscn")
+var rampBlock=ResourceLoader.load("res://scenes/pickable_ramp_normal.tscn")
+var helixhalfBlock=ResourceLoader.load("res://scenes/pickable_helix_half_normal.tscn")
+var helixquarterBlock=ResourceLoader.load("res://scenes/pickable_helix_quarter_normal.tscn")
+var waveBlock=ResourceLoader.load("res://scenes/pickable_wave_normal.tscn")
+var scurveBlock=ResourceLoader.load("res://scenes/pickbable_scurve_normal.tscn")
 var selectionCircle
 
 ##  START AND FINISH TRACK
@@ -83,6 +88,26 @@ func _on_right_controller_button_pressed(name):
 			block.global_position = right_hand.global_position
 		if selectionCircle.get_current_selection() == 2:
 			var block = curveLargeBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position = right_hand.global_position
+		if selectionCircle.get_current_selection() == 3:
+			var block = rampBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position = right_hand.global_position
+		if selectionCircle.get_current_selection() == 4:
+			var block = helixhalfBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position = right_hand.global_position
+		if selectionCircle.get_current_selection() == 5:
+			var block = helixquarterBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position = right_hand.global_position
+		if selectionCircle.get_current_selection() == 6:
+			var block = scurveBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position = right_hand.global_position
+		if selectionCircle.get_current_selection() == 7:
+			var block = waveBlock.instantiate()
 			get_parent().add_child(block,true)
 			block.global_position = right_hand.global_position
 	if name=="by_button":

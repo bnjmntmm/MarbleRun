@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cry4sssohyqn3"]
+[gd_scene load_steps=3 format=3 uid="uid://cry4sssohyqn3"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/pickable.gd" id="1_mnny7"]
+[ext_resource type="PackedScene" uid="uid://cvlrmo10pyuxs" path="res://scenes/scoring_collider.tscn" id="2_327yw"]
 
 [node name="XRToolsPickable" type="RigidBody3D" groups=["pickable_track"]]
 collision_layer = 4
 collision_mask = 7
+freeze = true
 freeze_mode = 1
 script = ExtResource("1_mnny7")
 
@@ -16,3 +18,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 
 [node name="SnapPoint2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="ScoringCollider" parent="." instance=ExtResource("2_327yw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.130459, 0)
+collision_mask = 32
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

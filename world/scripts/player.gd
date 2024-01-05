@@ -31,12 +31,14 @@ var init_controller_pos : Vector3
 ## MARBLE TRACKS INIT
 var straightBlock = ResourceLoader.load("res://scenes/pickable_straight_normal.tscn")
 var curveLargeBlock = ResourceLoader.load("res://scenes/pickable_curve_large.tscn")
+var rampBlock= ResourceLoader.load("res://scenes/pickable_ramp_normal.tscn")
 var selectionCircle
 
 var origin_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	#VIEWPORT SELECTION CIRCLE
 	selectionCircle = viewport_2_din_3d.get_scene_instance().get_child(0).get_child(1)
 	random_start_stop_position()
@@ -44,7 +46,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	print(selectionCircle.get_current_selection())
+	
+	
+	
 	
 func _physics_process(delta):
 	#label_3d.text = str(selectionCircle.get_current_selection())
@@ -147,18 +152,27 @@ func _on_left_button_released(name):
 
 
 func _on_right_button_pressed(name):
+	
 	#label_3d.text = name
 	if name=="ax_button":
 		if selectionCircle.get_current_selection() == 1:
+			PrintAdb.pADB("block 2 selected")
 			var block = straightBlock.instantiate()
 			get_parent().add_child(block,true)
 			block.global_position=right_hand.global_position
 			#block.freeze=true
 		if selectionCircle.get_current_selection() == 2:
+			PrintAdb.pADB("block 2 selected")
 			var block = curveLargeBlock.instantiate()
 			get_parent().add_child(block,true)
 			block.global_position=right_hand.global_position
 			#block.freeze=true
+		if selectionCircle.get_current_selection() == 3:
+			PrintAdb.pADB("block 2 selected")
+			var block= rampBlock.instantiate()
+			get_parent().add_child(block,true)
+			block.global_position=right_hand.global_position
+			
 	if name=="by_button":
 		spawn_marble.emit()
 			
