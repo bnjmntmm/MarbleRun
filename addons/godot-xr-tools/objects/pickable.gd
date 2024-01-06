@@ -7,6 +7,7 @@ var snap_radius = 0.1
 var is_snapped = false
 var local_snap_points = ["SnapPoint1", "SnapPoint2"]  # Names of the snap points on this piece
 var is_active_piece:bool
+var is_boosted:bool= false
 
 
 
@@ -576,3 +577,11 @@ func _on_area_3d_area_exited(area):
 			self.enabled=false
 		
 
+
+
+
+
+
+func _on_body_entered(body):
+	if body.name=="Marble" and is_boosted:
+		body.linear_velocity*=2

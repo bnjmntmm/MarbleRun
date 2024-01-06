@@ -75,6 +75,9 @@ size = Vector3(0.0955459, 0.0579383, 0.538556)
 
 [node name="XRToolsPickable" instance=ExtResource("1_58jbe")]
 collision_mask = 39
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -99,5 +102,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.125)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_xwhek")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

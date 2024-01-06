@@ -196,7 +196,7 @@ script = ExtResource("1_7v7rp")
 bg_color = Color(0.0431373, 0.0431373, 0.0431373, 1)
 line_color = Color(1, 1, 1, 1)
 highlight_color = Color(0.290196, 0.290196, 0.290196, 1)
-options = [null, null, null, null, null, null, null, null, null, null, null]
+options = [null, null, null, null, null, null, null, null, null, null]
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

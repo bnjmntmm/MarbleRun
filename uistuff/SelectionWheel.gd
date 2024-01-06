@@ -21,7 +21,7 @@ var straightBlock = preload("res://scenes/pickable_straight_normal.tscn")
 @export var options = []
 
 var selection = 0
-
+var boost_toggle:bool=false
 var controller_pos :Vector2
 func _ready():
 	controller_pos = Vector2(0,0)
@@ -35,6 +35,9 @@ func _draw():
 	var offset = SPRITE_SIZE / -2
 	
 	draw_circle(Vector2.ZERO, outer_radius, bg_color)
+	if boost_toggle:
+		draw_circle(Vector2.ZERO, outer_radius, Color.RED)
+		
 	draw_arc(Vector2.ZERO, inner_radius, 0, TAU, 120, line_color, line_width, true)
 	
 	if len(options) >= 3:

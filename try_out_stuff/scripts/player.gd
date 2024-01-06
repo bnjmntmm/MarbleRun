@@ -36,6 +36,7 @@ var trigger_left = false
 var trigger_right = false
 var allGrabbed = false
 var init_controller_pos : Vector3
+var toggle_boost:bool=false
 
 signal spawn_marble
 
@@ -82,13 +83,19 @@ func _on_left_controller_button_released(name):
 
 func _on_right_controller_button_pressed(name):
 	if name=="ax_button":
+		if selectionCircle.get_current_selection()==0:
+			toggle_boost=!toggle_boost
+			selectionCircle.boost_toggle=!selectionCircle.boost_toggle
 		if selectionCircle.get_current_selection() == 1:
 			var block = straightBlock.instantiate()
 			get_parent().add_child(block,true)
+			block.is_boosted=toggle_boost
 			block.global_position = right_hand.global_position
+			
 		if selectionCircle.get_current_selection() == 2:
 			var block = curveLargeBlock.instantiate()
 			get_parent().add_child(block,true)
+			block.is_boosted=toggle_boost
 			block.global_position = right_hand.global_position
 		if selectionCircle.get_current_selection() == 3:
 			var block = rampBlock.instantiate()
