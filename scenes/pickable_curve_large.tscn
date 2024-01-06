@@ -75,6 +75,9 @@ size = Vector3(0.343629, 0.0782558, 0.68093)
 
 [node name="XRToolsPickable" instance=ExtResource("1_l0bhi")]
 collision_mask = 39
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
 
 [node name="curve_large2" type="MeshInstance3D" parent="." index="0"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

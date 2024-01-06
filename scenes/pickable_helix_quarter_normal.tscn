@@ -74,6 +74,9 @@ size = Vector3(2.70633, 0.152906, 1)
 size = Vector3(0.795886, 0.0715616, 0.278538)
 
 [node name="XRToolsPickable" instance=ExtResource("1_0cnv0")]
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
