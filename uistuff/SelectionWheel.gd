@@ -11,13 +11,6 @@ const SPRITE_SIZE = Vector2(64, 64)
 @export var inner_radius: int = 64
 @export var line_width: int = 4
 
-#@export var options: Array[WheelOption]
-#@export var options: Array[WheelOptionAlt]
-#var straight_block = load("res://assets/building_blocks/straightBlock.tscn")
-#var curved_block = load("res://assets/building_blocks/curve_block.tscn")
-#var options = [straight_block, curved_block, straight_block, curved_block]
-var straightBlock = preload("res://scenes/pickable_straight_normal.tscn")
-
 @export var options = []
 
 var selection = 0
