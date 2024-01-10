@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ch3ml6w5dlljc"]
 
-[ext_resource type="Script" path="res://world/scripts/start_area.gd" id="1_v0qg6"]
+[ext_resource type="Script" path="res://scripts/start_area.gd" id="1_v0qg6"]
 [ext_resource type="PackedScene" uid="uid://b24djh3puus84" path="res://scenes/marble.tscn" id="2_u1cii"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pswkp"]
@@ -76,7 +76,7 @@ script = ExtResource("1_v0qg6")
 marble = ExtResource("2_u1cii")
 
 [node name="rampStart_solid_D" type="Node3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
 [node name="rampStart_solid_D2" type="MeshInstance3D" parent="rampStart_solid_D"]
 mesh = SubResource("ArrayMesh_gu6hs")
@@ -89,7 +89,7 @@ collision_mask = 33
 shape = SubResource("ConcavePolygonShape3D_qgxu8")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.391231, -0.0625124)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154936, -0.0145775)
 collision_layer = 0
 collision_mask = 33
 
@@ -97,4 +97,4 @@ collision_mask = 33
 shape = SubResource("SphereShape3D_cxagl")
 
 [node name="SnapPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.148935)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00500139, 0.0749357)

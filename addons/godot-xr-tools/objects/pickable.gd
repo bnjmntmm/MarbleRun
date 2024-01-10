@@ -8,7 +8,7 @@ var is_snapped = false
 var local_snap_points = ["SnapPoint1", "SnapPoint2"]  # Names of the snap points on this piece
 var is_active_piece:bool
 var is_boosted:bool= false
-
+var boosted_track_mat = preload("res://assets/boosted_track.tres")
 
 
 
@@ -155,6 +155,8 @@ var _highlighted : bool = false
 func is_xr_class(name : String) -> bool:
 	return name == "XRToolsPickable"
 
+@onready var label_3d = $Label3D
+var boosted_mat = preload("res://assets/boosted_track.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -170,7 +172,11 @@ func _ready():
 		var grab_point := child as XRToolsGrabPoint
 		if grab_point:
 			_grab_points.push_back(grab_point)
-
+	if is_boosted:
+		if get_child(0).get_mesh().surface_get_material(0).get_name() == "green":
+			get_child(0).get_mesh().surface_set_material(0,boosted_mat)
+		if get_child(0).get_mesh().surface_get_material(1).get_name() == "green":
+			get_child(0).get_mesh().surface_set_material(1,boosted_mat)
 
 # Test if this object can be picked up
 func can_pick_up(_by: Node3D) -> bool:

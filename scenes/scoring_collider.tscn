@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvlrmo10pyuxs"]
 
-[ext_resource type="Script" path="res://world/scripts/scoring_collider.gd" id="1_hinxn"]
+[ext_resource type="Script" path="res://scripts/scoring_collider.gd" id="1_hinxn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e0yvq"]
 size = Vector3(0.1, 0.1, 0.1)

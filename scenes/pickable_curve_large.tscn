@@ -80,23 +80,26 @@ max_contacts_reported = 10
 contact_monitor = true
 
 [node name="curve_large2" type="MeshInstance3D" parent="." index="0"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 mesh = SubResource("ArrayMesh_15wvs")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(0.173754, 0.00355892, 0, -0.00309963, 0.1995, 0, 0, 0, 0.2, 0.00440788, 0.0187211, -0.0157942)
+transform = Transform3D(0.113982, 0.00233656, 0, -0.00203334, 0.130979, 0, 0, 0, 0.131, 0.00440788, 0.0187211, -0.0157942)
 shape = SubResource("BoxShape3D_gthjd")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_4iwg6")
 
 [node name="SnapPoint1" parent="." index="3"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.254627, 0, 0.374715)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.153022, 0.00536476, 0.224938)
 
 [node name="SnapPoint2" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.376, 0, -0.253)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.224469, 0.00499898, -0.148305)
+
+[node name="ScoringCollider" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0362112, 0.0853665, -0.0284252)
 
 [node name="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("BoxShape3D_lw10d")

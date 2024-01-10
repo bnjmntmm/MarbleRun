@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Mixed Reality"
-run/main_scene="res://try_out_stuff/scenes/world.tscn"
+run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
-GameManager="*res://world/scripts/GameManager.gd"
+GameManager="*res://scripts/GameManager.gd"
 PrintAdb="*res://world/scripts/print_adb.gd"
 
 [editor_plugins]

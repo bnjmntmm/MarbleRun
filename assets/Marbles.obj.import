@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bcyx2fyu38qwi"
+path="res://.godot/imported/Marbles.obj-82608306eb916b6ba2daa006c14711e3.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Marbles.obj-82608306eb916b6ba2daa006c14711e3.mesh"]
+
+source_file="res://assets/Marbles.obj"
+dest_files=["res://.godot/imported/Marbles.obj-82608306eb916b6ba2daa006c14711e3.mesh", "res://.godot/imported/Marbles.obj-82608306eb916b6ba2daa006c14711e3.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

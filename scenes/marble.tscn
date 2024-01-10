@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://b24djh3puus84"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_q3r6x"]
-[ext_resource type="Shader" path="res://marble.gdshader" id="2_hjqkv"]
-[ext_resource type="Texture2D" uid="uid://cpm3pl2mtgtc8" path="res://Marble_Normal.png" id="3_dgla3"]
-[ext_resource type="ArrayMesh" uid="uid://bcyx2fyu38qwi" path="res://Marbles.obj" id="3_tcjod"]
-[ext_resource type="Texture2D" uid="uid://3xo15m3krb6m" path="res://cateye1.png" id="3_u24id"]
+[ext_resource type="Shader" path="res://assets/marble.gdshader" id="2_hjqkv"]
+[ext_resource type="Texture2D" uid="uid://cpm3pl2mtgtc8" path="res://assets/Marble_Normal.png" id="3_dgla3"]
+[ext_resource type="ArrayMesh" uid="uid://bcyx2fyu38qwi" path="res://assets/Marbles.obj" id="3_tcjod"]
+[ext_resource type="Texture2D" uid="uid://3xo15m3krb6m" path="res://assets/cateye1.png" id="3_u24id"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jjvvq"]
 friction = 0.3
@@ -12,7 +12,7 @@ bounce = 0.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gphyj"]
 margin = 0.01
-radius = 0.05
+radius = 0.027
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_stta7"]
 render_priority = 0
@@ -66,14 +66,13 @@ shadow_mesh = SubResource("ArrayMesh_rjb3s")
 collision_layer = 32
 collision_mask = 21
 physics_material_override = SubResource("PhysicsMaterial_jjvvq")
-enabled = false
-press_to_hold = false
+script = null
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("SphereShape3D_gphyj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
-transform = Transform3D(7.785, 0, 0, 0, 7.785, 0, 0, 0, 7.785, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_stta7")
 mesh = ExtResource("3_tcjod")
 

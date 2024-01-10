@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://61qbjo8x5dtg"]
 
-[ext_resource type="Script" path="res://world/scripts/finish_area.gd" id="1_pnc24"]
+[ext_resource type="Script" path="res://scripts/finish_area.gd" id="1_pnc24"]
 [ext_resource type="PackedScene" uid="uid://grsmv5olnhoi" path="res://confetti/confetti_alt.tscn" id="2_ibwe1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qghd3"]
@@ -71,14 +71,14 @@ data = PackedVector3Array(-0.1, 0.25, 0.5, -0.2875, 0.3125, 0.5, -0.2875, 0.3125
 [sub_resource type="BoxShape3D" id="BoxShape3D_uol6v"]
 size = Vector3(0.437, 0.07, 0.544)
 
-[node name="finish_area" type="Node3D"]
+[node name="finish_area" type="Node3D" groups=["pickable_track"]]
 script = ExtResource("1_pnc24")
 
 [node name="ConfettiAlt" parent="." instance=ExtResource("2_ibwe1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0455901, 0)
 
 [node name="end_rounded" type="Node3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
 [node name="end_rounded2" type="MeshInstance3D" parent="end_rounded"]
 mesh = SubResource("ArrayMesh_hvlx5")
@@ -97,5 +97,8 @@ collision_mask = 32
 [node name="CollisionShape3D" type="CollisionShape3D" parent="end_rounded/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.376226, 0.141414)
 shape = SubResource("BoxShape3D_uol6v")
+
+[node name="SnapPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00555339, 0.0745976)
 
 [connection signal="body_entered" from="end_rounded/Area3D" to="." method="_on_area_3d_body_entered"]
