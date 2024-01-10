@@ -166,7 +166,7 @@ func _ready():
 	
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
-	
+	GameManager.delete_track_pickable.connect(delete_track)
 	# Get all grab points
 	for child in get_children():
 		var grab_point := child as XRToolsGrabPoint
@@ -586,7 +586,9 @@ func _on_area_3d_area_exited(area):
 
 
 
-
+func delete_track():
+	if self.is_active_piece:
+		queue_free()
 
 func _on_body_entered(body):
 	if body.name=="Marble" and is_boosted:

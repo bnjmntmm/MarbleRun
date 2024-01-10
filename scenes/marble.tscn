@@ -17,7 +17,7 @@ radius = 0.027
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_stta7"]
 render_priority = 0
 shader = ExtResource("2_hjqkv")
-shader_parameter/distortion_size = 0.01
+shader_parameter/distortion_size = 0.1
 shader_parameter/glass = ExtResource("3_dgla3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a05gv"]

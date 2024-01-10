@@ -18,6 +18,7 @@ signal xMinus
 signal yAdd
 signal yMinus
 
+signal delete_track_pickable
 
 
 
@@ -53,3 +54,5 @@ func apply_area():
 	
 func setupComplete():
 	complete.emit()
+func delete_track():
+	delete_track_pickable.emit()

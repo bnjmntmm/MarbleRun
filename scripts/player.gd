@@ -41,6 +41,7 @@ var allGrabbed = false
 var init_controller_pos : Vector3
 var toggle_boost:bool=false
 
+
 signal spawn_marble
 
 # Called when the node enters the scene tree for the first time.
@@ -133,7 +134,8 @@ func _on_right_controller_button_pressed(name):
 		grib_right = true
 	if name=="trigger_click":
 		trigger_left = true
-	
+	if name=="primary_click":
+		GameManager.delete_track()
 
 
 func _on_right_controller_button_released(name):
