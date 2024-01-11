@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Mixed Reality"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/Staging/main_stage.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
@@ -20,10 +20,11 @@ config/icon="res://icon.svg"
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 GameManager="*res://scripts/GameManager.gd"
 PrintAdb="*res://world/scripts/print_adb.gd"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/silent_wolf/plugin.cfg")
 
 [input]
 

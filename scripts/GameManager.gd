@@ -19,6 +19,7 @@ signal yAdd
 signal yMinus
 
 signal delete_track_pickable
+signal backMenu
 
 
 
@@ -56,3 +57,6 @@ func setupComplete():
 	complete.emit()
 func delete_track():
 	delete_track_pickable.emit()
+	
+func back_to_menu():
+	backMenu.emit()

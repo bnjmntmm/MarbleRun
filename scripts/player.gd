@@ -1,9 +1,9 @@
 extends XROrigin3D
 
-@onready var AreaSetupViewport = $LeftController/AreaSetupViewport
+@onready var AreaSetupViewport = $LeftHand/AreaSetupViewport
 var cube = preload("res://scenes/cube.tscn")
 
-@onready var selectionViewport = $LeftController/SelectionViewport
+@onready var selectionViewport = $LeftHand/SelectionViewport
 
 @onready var area_init_box = $"../Play_Area_Init/Area_Init_Box"
 @onready var label_3d = $"../Label3D"
@@ -23,10 +23,10 @@ var selectionCircle
 @onready var finish_area = $"../Tracks/finish_area"
 
 ## Hands and Controller
-@onready var left_controller = $LeftController
-@onready var right_controller = $RightController
-@onready var left_hand = $LeftController/LeftHand
-@onready var right_hand = $RightController/RightHand
+@onready var left_controller = $LeftHand
+@onready var right_controller = $RightHand
+@onready var left_hand = $LeftHand/LeftHand
+@onready var right_hand = $RightHand/RightHand
 
 
 #camera

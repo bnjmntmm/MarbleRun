@@ -2,7 +2,8 @@ extends Node
 @onready var label_3d = $"../Label3D"
 @onready var area_init_box := $Area_Init_Box
 
-@onready var area_setup_viewport = $"../XROrigin3D/LeftController/AreaSetupViewport"
+@onready var area_setup_viewport = $"../XROrigin3D/LeftHand/AreaSetupViewport"
+
 
 signal setupComplete
 
