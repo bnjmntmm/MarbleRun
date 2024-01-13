@@ -78,7 +78,7 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_i2yjw")
 
 [node name="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0481171, 0.0726625, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0481171, 0.0635556, 0)
 shape = SubResource("BoxShape3D_kcnn1")
 
 [node name="SnapPoint1" parent="." index="3"]
@@ -91,7 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.150801, 0.155978, 0.227309)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0777089, 0.141368, 0)
 
 [node name="CollisionShape3D" parent="Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.956233, 0.292605, 0, -0.292605, 0.956233, -0.121188, 0.0705221, 0)
+transform = Transform3D(1, 0, 0, 0, 0.956233, 0.292605, 0, -0.292605, 0.956233, -0.121188, 0.0667908, 0)
 shape = SubResource("BoxShape3D_rxq3n")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var marble : PackedScene 
+var marble = ResourceLoader.load("res://scenes/marble.tscn")
 @onready var area_3d = $Area3D
 var marble_spawned
 var spawned = false

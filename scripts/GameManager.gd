@@ -21,13 +21,19 @@ signal yMinus
 signal delete_track_pickable
 signal backMenu
 
-
-
 var passed_through_tracks = 0
 
 var final_score : float
 var start_time = 0
 var end_time = 0
+
+func _ready():
+	SilentWolf.configure({
+	"api_key": "rBQM1XFDj91z2kmpCa1ps2HWVYnj7R6XahCQOe2K",
+	"game_id": "MarbleRun",
+	"log_level": 1
+  })
+
 
 func calculateScore():
 	var elapsedTime = end_time-start_time
@@ -60,3 +66,5 @@ func delete_track():
 	
 func back_to_menu():
 	backMenu.emit()
+func get_current_score():
+	var sw_result = await SilentWolf.Scores.get_scores().sw_get_scores_complete

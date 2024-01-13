@@ -61,7 +61,7 @@ data = PackedVector3Array(-0.788865, 0.345413, -0.763908, -0.670513, 0.426033, -
 size = Vector3(2.31115, 0.152906, 0.72328)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b4gjl"]
-size = Vector3(0.478, 0.01, 0.279)
+size = Vector3(0.395299, 0.01, 0.279)
 
 [node name="XRToolsPickable" instance=ExtResource("1_0cnv0")]
 continuous_cd = true
@@ -88,5 +88,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0736626, 0.00460054, -0.15
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149098, 0.0811155, 0.0784043)
 
 [node name="CollisionShape3D" parent="Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.954162, 0.299291, 0, -0.299291, 0.954162, -0.00283048, 0.0740772, 0.00060714)
+transform = Transform3D(1, 0, 0, 0, 0.954162, 0.299291, 0, -0.299291, 0.954162, -0.00283048, 0.0663186, 0.00060714)
 shape = SubResource("BoxShape3D_b4gjl")

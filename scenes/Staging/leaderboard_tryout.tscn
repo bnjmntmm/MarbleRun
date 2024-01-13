@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4c1lclm173dg"]
+
+[ext_resource type="PackedScene" uid="uid://b2h8ok8yfc7wb" path="res://addons/silent_wolf/Scores/Leaderboard.tscn" id="1_srj2c"]
+
+[node name="Leaderboard" instance=ExtResource("1_srj2c")]
+position = Vector2(576, 340)
+
+[node name="OldBoard" parent="." index="0"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Board" parent="." index="1"]
+offset_left = -574.0
+offset_top = -332.0
+offset_right = 574.0
+offset_bottom = 306.0
+size_flags_horizontal = 4
+
+[node name="CloseButtonContainer" parent="Board" index="3"]
+visible = false

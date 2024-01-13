@@ -36,4 +36,4 @@ target_scene = "res://scenes/Staging/level_scene.tscn"
 transform = Transform3D(1, 0, 0, 0, 0.827786, 0.561044, 0, -0.561044, 0.827786, 0, 5.40353, 0)
 
 [node name="VirtualKeyboard" parent="." index="5" instance=ExtResource("5_h70w1")]
-transform = Transform3D(1, 0, 0, 0, 0.819832, 0.572604, 0, -0.572604, 0.819832, 0, 0.890644, -1.49594)
+transform = Transform3D(1, 0, 0, 0, 0.819832, 0.572604, 0, -0.572604, 0.819832, 0, 0.690644, -1.49594)

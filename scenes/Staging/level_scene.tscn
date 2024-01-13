@@ -33,7 +33,6 @@ cull_mask = 524287
 
 [node name="AreaSetupViewport" parent="XROrigin3D/LeftHand" index="2" instance=ExtResource("3_810u5")]
 transform = Transform3D(0.192472, -0.0285809, 0.0631361, 0, 0.112502, 0.217155, -0.0543553, -0.101205, 0.223565, -0.0794103, 0.142461, -0.149324)
-visible = false
 screen_size = Vector2(2, 2)
 collision_layer = 5242880
 scene = ExtResource("4_ibte6")
