@@ -46,6 +46,7 @@ func calculateScore():
 	end_time = 0
 	start_time = 0
 	passed_through_tracks = 0
+	
 
 func addXValue():
 	xAdd.emit()

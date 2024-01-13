@@ -24,6 +24,7 @@ func _on_xr_origin_3d_spawn_marble():
 	else:
 		marble_spawned.queue_free()
 		spawned = false
+		GameManager.passed_through_tracks = 0
 		
 	
 		

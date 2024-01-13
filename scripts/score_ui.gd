@@ -6,12 +6,14 @@ extends Control
 @onready var score_label = $BoxContainer/scoreLabel
 @onready var back_button = $BackButton
 
-var list_index = 0
-var max_scores = 10
-var local_scores
-var scores
-const ScoreItem = preload("res://addons/silent_wolf/Scores/ScoreItem.tscn")
-var ld_name ="main"
+@onready var leaderboard = $Box/Leaderboard
+@onready var box = $Box
+
+
+var leaderboard_Prefab = preload("res://scenes/Staging/leaderboard_tryout.tscn")
+var leaderBoardPos = Vector2(182,31)
+var leaderboardScale = Vector2(0.5,0.5)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManagerScoreLabel.text = str(GameManager.final_score)
@@ -20,13 +22,17 @@ func _ready():
 
 func _on_button_button_up():
 	if name_input.text != "":
-		list_index = 0
 		save_button.set_disabled(true)
 		save_button.text = "Saved"
+		
 		#local_scores.append({"player_name": name_input.text, "score": GameManager.final_score})
 		
 		back_button.set_disabled(true)
+		leaderboard.queue_free()
 		SilentWolf.Scores.save_score(name_input.text, GameManager.final_score)
+		var LBFP = leaderboard_Prefab.instantiate()
+		LBFP.transform = Transform2D(0, leaderboardScale, 0, leaderBoardPos)
+		box.add_child(LBFP)
 		back_button.set_disabled(false)
 		
 

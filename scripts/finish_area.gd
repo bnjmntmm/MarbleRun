@@ -23,10 +23,9 @@ func _on_area_3d_body_entered(body):
 			GameManager.calculateScore()
 			confetti_alt.play_confetti()
 			marble_in_fin.emit()
-			await get_tree().create_timer(3.0).timeout
+			await get_tree().create_timer(1.5).timeout
 			switch_to_score_scene()
 			
-
 
 func switch_to_score_scene():
 	

@@ -88,46 +88,47 @@ func _on_left_controller_button_released(name):
 
 
 func _on_right_controller_button_pressed(name):
-	if name=="ax_button":
-		if selectionCircle.get_current_selection()==0:
-			toggle_boost=!toggle_boost
-			selectionCircle.boost_toggle=!selectionCircle.boost_toggle
-		if selectionCircle.get_current_selection() == 1:
-			var block = straightBlock.instantiate()
-			block.is_boosted=toggle_boost
-			get_parent().add_child(block,true)
-			block.global_position = right_hand.global_position
-			
-		if selectionCircle.get_current_selection() == 2:
-			var block = curveLargeBlock.instantiate()
-			block.is_boosted=toggle_boost
-			get_parent().add_child(block,true)
-			block.global_position = right_hand.global_position
-		if selectionCircle.get_current_selection() == 7:
-			var block = rampBlock.instantiate()
-			block.is_boosted=toggle_boost
-			get_parent().add_child(block,true)
-			block.global_position = right_hand.global_position
-		if selectionCircle.get_current_selection() == 6:
-			var block = helixhalfBlock.instantiate()
-			block.is_boosted=toggle_boost
-			get_parent().add_child(block,true)
-			block.global_position = right_hand.global_position
-		if selectionCircle.get_current_selection() == 5:
-			var block = helixquarterBlock.instantiate()
-			block.is_boosted=toggle_boost
-			get_parent().add_child(block,true)
-			block.global_position = right_hand.global_position
-		if selectionCircle.get_current_selection() == 4:
-			var block = scurveBlock.instantiate()
-			block.is_boosted=toggle_boost
-			get_parent().add_child(block,true)
-			block.global_position = right_hand.global_position
-		if selectionCircle.get_current_selection() == 3:
-			var block = waveBlock.instantiate()
-			block.is_boosted=toggle_boost
-			get_parent().add_child(block,true)
-			block.global_position = right_hand.global_position
+	if selectionViewport.visible:
+		if name=="ax_button":
+			if selectionCircle.get_current_selection()==0:
+				toggle_boost=!toggle_boost
+				selectionCircle.boost_toggle=!selectionCircle.boost_toggle
+			if selectionCircle.get_current_selection() == 1:
+				var block = straightBlock.instantiate()
+				block.is_boosted=toggle_boost
+				get_parent().add_child(block,true)
+				block.global_position = right_hand.global_position
+				
+			if selectionCircle.get_current_selection() == 2:
+				var block = curveLargeBlock.instantiate()
+				block.is_boosted=toggle_boost
+				get_parent().add_child(block,true)
+				block.global_position = right_hand.global_position
+			if selectionCircle.get_current_selection() == 7:
+				var block = rampBlock.instantiate()
+				block.is_boosted=toggle_boost
+				get_parent().add_child(block,true)
+				block.global_position = right_hand.global_position
+			if selectionCircle.get_current_selection() == 6:
+				var block = helixhalfBlock.instantiate()
+				block.is_boosted=toggle_boost
+				get_parent().add_child(block,true)
+				block.global_position = right_hand.global_position
+			if selectionCircle.get_current_selection() == 5:
+				var block = helixquarterBlock.instantiate()
+				block.is_boosted=toggle_boost
+				get_parent().add_child(block,true)
+				block.global_position = right_hand.global_position
+			if selectionCircle.get_current_selection() == 4:
+				var block = scurveBlock.instantiate()
+				block.is_boosted=toggle_boost
+				get_parent().add_child(block,true)
+				block.global_position = right_hand.global_position
+			if selectionCircle.get_current_selection() == 3:
+				var block = waveBlock.instantiate()
+				block.is_boosted=toggle_boost
+				get_parent().add_child(block,true)
+				block.global_position = right_hand.global_position
 	if name=="by_button":
 		spawn_marble.emit()
 	if name=="grib_click":
