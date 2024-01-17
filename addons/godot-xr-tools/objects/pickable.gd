@@ -174,9 +174,9 @@ func _ready():
 			_grab_points.push_back(grab_point)
 	if is_boosted:
 		if get_child(0).get_mesh().surface_get_material(0).get_name() == "green":
-			get_child(0).get_mesh().surface_set_material(0,boosted_mat)
+			get_child(0).set_surface_override_material(0,boosted_mat)
 		if get_child(0).get_mesh().surface_get_material(1).get_name() == "green":
-			get_child(0).get_mesh().surface_set_material(1,boosted_mat)
+			get_child(0).set_surface_override_material(1,boosted_mat)
 
 # Test if this object can be picked up
 func can_pick_up(_by: Node3D) -> bool:

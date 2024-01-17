@@ -84,6 +84,8 @@ func _on_left_controller_button_released(name):
 		grib_left = false
 	if name=="trigger_click":
 		trigger_left = false
+	if name=="primary_click":
+		random_start_stop_position()
 
 
 
