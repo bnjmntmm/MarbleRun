@@ -8,6 +8,8 @@ var is_snapped = false
 var local_snap_points = ["SnapPoint1", "SnapPoint2"]  # Names of the snap points on this piece
 var is_active_piece:bool
 var is_boosted:bool= false
+
+
 var boosted_track_mat = preload("res://assets/boosted_track.tres")
 
 
@@ -537,6 +539,7 @@ func snap_to(snap_point_data: Dictionary):
 		
 		
 	global_transform.origin = new_global_position
+	
 	#global_rotation=target_snap_point.global_rotation
 
 	
@@ -556,6 +559,7 @@ func _on_dropped(pickable):
 		pickable.is_active_piece=false
 		
 		
+		
 			
 		#if is_snapped:
 			#self.enabled=false
@@ -564,7 +568,7 @@ func _on_dropped(pickable):
 func _on_picked_up(pickable):
 	if pickable.is_in_group("pickable_track"):
 		pickable.is_active_piece=true
-			
+		
 		
 		
 
@@ -591,5 +595,14 @@ func delete_track():
 		queue_free()
 
 func _on_body_entered(body):
-	if body.name=="Marble" and is_boosted:
-		body.linear_velocity*=2
+	if body.name == "Marble" and is_boosted:
+		body.boost=true
+		
+		
+	if body.name == "Marble" and !is_boosted:
+		body.boost=false
+		
+		
+		
+
+

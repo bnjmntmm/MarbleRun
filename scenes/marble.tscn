@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b24djh3puus84"]
+[gd_scene load_steps=8 format=3 uid="uid://b24djh3puus84"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_q3r6x"]
 [ext_resource type="Texture2D" uid="uid://dfxv85o784cve" path="res://assets/gold-glitter-texture.jpg" id="2_3lfiw"]
+[ext_resource type="Script" path="res://scenes/marble.gd" id="2_dyask"]
 [ext_resource type="ArrayMesh" uid="uid://bcyx2fyu38qwi" path="res://assets/Marbles.obj" id="3_tcjod"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jjvvq"]
@@ -22,7 +23,7 @@ clearcoat_roughness = 1.0
 collision_layer = 32
 collision_mask = 21
 physics_material_override = SubResource("PhysicsMaterial_jjvvq")
-script = null
+script = ExtResource("2_dyask")
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("SphereShape3D_gphyj")
