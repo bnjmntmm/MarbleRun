@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://codhl7i4oue21"]
+
+[ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1_pdswo"]
+[ext_resource type="Texture2D" uid="uid://bmvdach5mvnur" path="res://assets/UI/controls.png" id="2_faohv"]
+[ext_resource type="Script" path="res://scripts/ScoreboardLoader.gd" id="3_4phni"]
+
+[node name="MainStage" instance=ExtResource("1_pdswo")]
+main_scene = "res://scenes/Staging/level_scene.tscn"
+
+[node name="LoadingScreen" parent="." index="2"]
+splash_screen = ExtResource("2_faohv")
+
+[node name="StartXR" parent="." index="4"]
+enable_passthrough = true
+
+[node name="ScoreboardLoader" type="Node3D" parent="." index="5"]
+script = ExtResource("3_4phni")

@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://rptnt66mxu6u"]
+
+[ext_resource type="PackedScene" uid="uid://d5gu7v2nhtvx" path="res://scenes/Staging/baseScene.tscn" id="1_sf25b"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_iuig7"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_810u5"]
+[ext_resource type="PackedScene" uid="uid://d32dp4ac52fcx" path="res://scenes/canvas_layer.tscn" id="4_ibte6"]
+[ext_resource type="PackedScene" uid="uid://crjjptruyvyc" path="res://assets/UI/ui_scene.tscn" id="5_vw6v6"]
+[ext_resource type="Script" path="res://scripts/Play_Area_Init.gd" id="6_qddwc"]
+[ext_resource type="PackedScene" uid="uid://b83vgfmlq1fw5" path="res://scenes/area_init_box.tscn" id="7_bgk47"]
+[ext_resource type="PackedScene" uid="uid://ch3ml6w5dlljc" path="res://scenes/start_area.tscn" id="8_8theq"]
+[ext_resource type="PackedScene" uid="uid://61qbjo8x5dtg" path="res://scenes/finish_area.tscn" id="9_ceso0"]
+
+[sub_resource type="Environment" id="Environment_tv17p"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4f0l2"]
+size = Vector3(20, 1, 20)
+
+[node name="LevelScene" instance=ExtResource("1_sf25b")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_tv17p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.415328, 0.909672, 0, -0.909672, 0.415328, 0, 0, 0)
+
+[node name="XROrigin3D" parent="." index="2"]
+script = ExtResource("2_iuig7")
+
+[node name="XRCamera3D" parent="XROrigin3D" index="0"]
+cull_mask = 524287
+
+[node name="AreaSetupViewport" parent="XROrigin3D/LeftHand" index="2" instance=ExtResource("3_810u5")]
+transform = Transform3D(0.192472, -0.0285809, 0.0631361, 0, 0.112502, 0.217155, -0.0543553, -0.101205, 0.223565, -0.0794103, 0.142461, -0.149324)
+screen_size = Vector2(2, 2)
+collision_layer = 5242880
+scene = ExtResource("4_ibte6")
+viewport_size = Vector2(1280, 720)
+unshaded = true
+
+[node name="SelectionViewport" parent="XROrigin3D/LeftHand" index="3" instance=ExtResource("3_810u5")]
+transform = Transform3D(0.15, 0, 0, 0, 0.129904, 0.075, 0, -0.075, 0.129904, 0, 0.166512, -0.0997229)
+visible = false
+screen_size = Vector2(4, 3)
+enabled = false
+collision_layer = 0
+scene = ExtResource("5_vw6v6")
+viewport_size = Vector2(800, 600)
+unshaded = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+collision_layer = 16
+collision_mask = 524320
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_4f0l2")
+
+[node name="Play_Area_Init" type="Node" parent="." index="4"]
+script = ExtResource("6_qddwc")
+
+[node name="Area_Init_Box" parent="Play_Area_Init" index="0" instance=ExtResource("7_bgk47")]
+
+[node name="Tracks" type="Node3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230292, 0)
+
+[node name="StartArea" parent="Tracks" index="0" instance=ExtResource("8_8theq")]
+visible = false
+
+[node name="finish_area" parent="Tracks" index="1" instance=ExtResource("9_ceso0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+visible = false
+target_scene = "res://scenes/Staging/score_and_submit_scene.tscn"
+
+[connection signal="spawn_marble" from="XROrigin3D" to="Tracks/StartArea" method="_on_xr_origin_3d_spawn_marble"]
+[connection signal="button_pressed" from="XROrigin3D/LeftHand" to="XROrigin3D" method="_on_left_controller_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/LeftHand" to="XROrigin3D" method="_on_left_controller_button_released"]
+[connection signal="button_pressed" from="XROrigin3D/RightHand" to="XROrigin3D" method="_on_right_controller_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/RightHand" to="XROrigin3D" method="_on_right_controller_button_released"]

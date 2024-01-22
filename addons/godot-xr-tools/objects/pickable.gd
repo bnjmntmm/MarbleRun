@@ -3,6 +3,17 @@ class_name XRToolsPickable
 extends RigidBody3D
 
 
+var snap_radius = 0.1
+var is_snapped = false
+var local_snap_points = ["SnapPoint1", "SnapPoint2"]  # Names of the snap points on this piece
+var is_active_piece:bool
+var is_boosted:bool= false
+
+
+var boosted_track_mat = preload("res://assets/boosted_track.tres")
+
+
+
 ## XR Tools Pickable Object
 ##
 ## This script allows a [RigidBody3D] to be picked up by an
@@ -146,15 +157,28 @@ var _highlighted : bool = false
 func is_xr_class(name : String) -> bool:
 	return name == "XRToolsPickable"
 
+@onready var label_3d = $Label3D
+var boosted_mat = preload("res://assets/boosted_track.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	if is_in_group("pickable_track"):
+		freeze=true
+	
+	picked_up.connect(_on_picked_up)
+	dropped.connect(_on_dropped)
+	GameManager.delete_track_pickable.connect(delete_track)
 	# Get all grab points
 	for child in get_children():
 		var grab_point := child as XRToolsGrabPoint
 		if grab_point:
 			_grab_points.push_back(grab_point)
-
+	if is_boosted:
+		if get_child(0).get_mesh().surface_get_material(0).get_name() == "green":
+			get_child(0).set_surface_override_material(0,boosted_mat)
+		if get_child(0).get_mesh().surface_get_material(1).get_name() == "green":
+			get_child(0).set_surface_override_material(1,boosted_mat)
 
 # Test if this object can be picked up
 func can_pick_up(_by: Node3D) -> bool:
@@ -472,3 +496,113 @@ func _get_grab_point(_grabber : Node) -> XRToolsGrabPoint:
 func _set_ranged_grab_method(new_value: int) -> void:
 	ranged_grab_method = new_value
 	can_ranged_grab = new_value != RangedMethod.NONE
+
+		
+func _physics_process(delta):
+	if self.is_in_group("pickable_track"):
+		var nearest_snap_point_data = get_nearest_snap_point()
+		if nearest_snap_point_data != null:
+			snap_to(nearest_snap_point_data)
+		
+
+func get_nearest_snap_point():
+	var nearest_snap_point_data = {}
+	var min_distance = snap_radius
+	for track_piece in get_tree().get_nodes_in_group("pickable_track"):
+		if track_piece==self:
+			continue
+		for snap_point in track_piece.get_children():
+				
+			if "SnapPoint" in snap_point.name:
+				for local_snap_point_name in local_snap_points:
+					var local_snap_point = self.get_node(local_snap_point_name)
+					var distance = local_snap_point.global_transform.origin.distance_to(snap_point.global_transform.origin)
+					if distance < min_distance:
+						min_distance = distance
+						nearest_snap_point_data = {"target_snap_point": snap_point, "local_snap_point": local_snap_point}
+			
+				
+	return nearest_snap_point_data if nearest_snap_point_data else null
+		
+func snap_to(snap_point_data: Dictionary):
+	
+		
+	var target_snap_point = snap_point_data["target_snap_point"]
+	var local_snap_point = snap_point_data["local_snap_point"]
+			
+
+	var local_snap_point_global = local_snap_point.global_transform.origin
+	var target_snap_point_global = target_snap_point.global_transform.origin
+
+	var new_global_position = global_transform.origin + target_snap_point_global - local_snap_point_global
+	
+		
+		
+	global_transform.origin = new_global_position
+	
+	#global_rotation=target_snap_point.global_rotation
+
+	
+#	if is_active_piece:
+#		target_snap_point.get_parent().enabled=false	
+		#is_snapped=true
+	
+		#global_transform.basis.x = target_snap_point.get_parent().global_transform.basis.x
+		#target_snap_point.get_parent().enabled=false
+		
+		
+
+	#is_snapped = true	
+func _on_dropped(pickable):
+	if pickable.is_in_group("pickable_track"):
+		pickable.rotation = Vector3(0,pickable.rotation.y,0)
+		pickable.is_active_piece=false
+		
+		
+		
+			
+		#if is_snapped:
+			#self.enabled=false
+		
+		#pickable.freeze=true	
+func _on_picked_up(pickable):
+	if pickable.is_in_group("pickable_track"):
+		pickable.is_active_piece=true
+		
+		
+		
+
+
+func _on_area_3d_area_entered(area):
+	if area.name=="right_hand_area":
+		if !is_active_piece:
+			self.enabled=true
+
+
+
+func _on_area_3d_area_exited(area):
+	if area.name=="right_hand_area":
+		
+		if !is_active_piece:
+			self.enabled=false
+		
+
+
+
+
+func delete_track():
+	if self.is_active_piece:
+		queue_free()
+
+func _on_body_entered(body):
+	if body.name == "Marble" and is_boosted:
+		body.boost=true
+		
+		
+	if body.name == "Marble" and !is_boosted:
+		body.boost=false
+		
+		
+		
+
+

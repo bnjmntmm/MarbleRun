@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://neeap1st1403"]
+
+[resource]
+resource_name = "green"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.565387, 0.34434, 1, 1)
+metallic_specular = 0.54
+roughness = 0.62

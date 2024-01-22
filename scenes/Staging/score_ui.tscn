@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=3 uid="uid://gee534b6ftex"]
+
+[ext_resource type="Script" path="res://scripts/score_ui.gd" id="1_ib78y"]
+[ext_resource type="PackedScene" uid="uid://d4c1lclm173dg" path="res://scenes/Staging/leaderboard_tryout.tscn" id="2_t2qg1"]
+
+[node name="SCORE_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("1_ib78y")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = -583.0
+offset_top = -333.0
+offset_right = 579.0
+offset_bottom = 331.0
+color = Color(0.545098, 0.670588, 0.560784, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -519.0
+offset_top = -270.0
+offset_right = -387.0
+offset_bottom = -244.0
+text = "YOU'VE SCORED: "
+
+[node name="SaveButton" type="Button" parent="Label"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 87.0
+offset_right = 239.0
+offset_bottom = 118.0
+text = "SAVE SCORE TO SCOREBOARD"
+
+[node name="GameManagerScoreLabel" type="Label" parent="Label"]
+layout_mode = 0
+offset_left = 132.0
+offset_right = 224.0
+offset_bottom = 31.0
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -518.0
+offset_top = -234.0
+offset_right = -422.0
+offset_bottom = -208.0
+text = "Your Name: "
+
+[node name="NameInput" type="LineEdit" parent="NameLabel"]
+layout_mode = 0
+offset_left = 96.0
+offset_right = 223.0
+offset_bottom = 31.0
+placeholder_text = "name"
+
+[node name="Box" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -183.0
+offset_right = 322.0
+offset_bottom = 220.0
+
+[node name="Leaderboard" parent="Box" instance=ExtResource("2_t2qg1")]
+position = Vector2(182, 31)
+scale = Vector2(0.5, 0.5)
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -525.0
+offset_top = 283.0
+offset_right = -397.0
+offset_bottom = 314.0
+text = "BACK TO START"
+
+[connection signal="button_up" from="Label/SaveButton" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="BackButton" to="." method="_on_back_button_button_up"]

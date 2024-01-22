@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dp702nja2x4kp"]
+
+[ext_resource type="PackedScene" uid="uid://d5gu7v2nhtvx" path="res://scenes/Staging/baseScene.tscn" id="1_v8c2u"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_v003n"]
+[ext_resource type="PackedScene" uid="uid://gee534b6ftex" path="res://scenes/Staging/score_ui.tscn" id="3_snsf4"]
+[ext_resource type="Script" path="res://scripts/BackToMenu.gd" id="3_twr4t"]
+[ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="5_h70w1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5yeon"]
+size = Vector3(20, 1, 20)
+
+[node name="ScoreAndSubmit_Scene" instance=ExtResource("1_v8c2u")]
+
+[node name="FunctionPointer" parent="XROrigin3D" index="4"]
+distance = 5.0
+show_laser = 1
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+collision_layer = 16
+collision_mask = 524320
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_5yeon")
+
+[node name="Viewport2Din3D" parent="." index="2" instance=ExtResource("2_v003n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95305, -2.13603)
+scene = ExtResource("3_snsf4")
+viewport_size = Vector2(1100, 650)
+
+[node name="BackToMenu" type="Node3D" parent="." index="3"]
+script = ExtResource("3_twr4t")
+target_scene = "res://scenes/Staging/level_scene.tscn"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.827786, 0.561044, 0, -0.561044, 0.827786, 0, 5.40353, 0)
+
+[node name="VirtualKeyboard" parent="." index="5" instance=ExtResource("5_h70w1")]
+transform = Transform3D(1, 0, 0, 0, 0.819832, 0.572604, 0, -0.572604, 0.819832, 0, 0.690644, -1.49594)

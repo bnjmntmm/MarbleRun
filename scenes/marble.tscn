@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://b24djh3puus84"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_q3r6x"]
+[ext_resource type="Texture2D" uid="uid://dfxv85o784cve" path="res://assets/gold-glitter-texture.jpg" id="2_3lfiw"]
+[ext_resource type="Script" path="res://scenes/marble.gd" id="2_dyask"]
+[ext_resource type="ArrayMesh" uid="uid://bcyx2fyu38qwi" path="res://assets/Marbles.obj" id="3_tcjod"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jjvvq"]
+friction = 0.3
+bounce = 0.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gphyj"]
+margin = 0.01
+radius = 0.026
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdfa8"]
+albedo_texture = ExtResource("2_3lfiw")
+metallic_specular = 0.67
+roughness = 0.0
+clearcoat_roughness = 1.0
+
+[node name="Marble" instance=ExtResource("1_q3r6x")]
+collision_layer = 32
+collision_mask = 21
+physics_material_override = SubResource("PhysicsMaterial_jjvvq")
+script = ExtResource("2_dyask")
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_gphyj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_mdfa8")
+mesh = ExtResource("3_tcjod")
+
+[node name="Label3D" type="Label3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.105634, 0)
+billboard = 1
