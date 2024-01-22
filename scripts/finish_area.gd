@@ -22,6 +22,7 @@ func _on_area_3d_body_entered(body):
 			GameManager.end_time = Time.get_unix_time_from_system()
 			GameManager.calculateScore()
 			confetti_alt.play_confetti()
+			body.stopPlaying()
 			marble_in_fin.emit()
 			await get_tree().create_timer(1.5).timeout
 			switch_to_score_scene()

@@ -55,9 +55,12 @@ hue_variation_max = 1.0
 
 [node name="PartyWhistle" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_h848s")
+volume_db = -20.0
 
 [node name="Fanfare" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_4gqpf")
+volume_db = -20.0
 
 [node name="ConfettiPop" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_f2qiw")
+volume_db = -20.0

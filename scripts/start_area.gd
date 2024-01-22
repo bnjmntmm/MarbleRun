@@ -19,9 +19,11 @@ func _on_xr_origin_3d_spawn_marble():
 		spawned = true
 		marble_spawned = marble.instantiate()
 		get_parent().get_parent().add_child(marble_spawned)
+		marble_spawned.startPlaying()
 		marble_spawned.global_position = area_3d.global_position
 		GameManager.start_time = Time.get_unix_time_from_system()
 	else:
+		marble_spawned.stopPlaying()
 		marble_spawned.queue_free()
 		spawned = false
 		GameManager.passed_through_tracks = 0

@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp702nja2x4kp"]
+[gd_scene load_steps=9 format=3 uid="uid://dp702nja2x4kp"]
 
 [ext_resource type="PackedScene" uid="uid://d5gu7v2nhtvx" path="res://scenes/Staging/baseScene.tscn" id="1_v8c2u"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_v003n"]
 [ext_resource type="PackedScene" uid="uid://gee534b6ftex" path="res://scenes/Staging/score_ui.tscn" id="3_snsf4"]
 [ext_resource type="Script" path="res://scripts/BackToMenu.gd" id="3_twr4t"]
 [ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="5_h70w1"]
+[ext_resource type="AudioStream" uid="uid://4ev73wwqhmi0" path="res://assets/sounds/background_music.mp3" id="6_getg4"]
+[ext_resource type="Script" path="res://scripts/AudioStreamPlayer.gd" id="7_5ew62"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5yeon"]
 size = Vector3(20, 1, 20)
@@ -37,3 +39,10 @@ transform = Transform3D(1, 0, 0, 0, 0.827786, 0.561044, 0, -0.561044, 0.827786, 
 
 [node name="VirtualKeyboard" parent="." index="5" instance=ExtResource("5_h70w1")]
 transform = Transform3D(1, 0, 0, 0, 0.819832, 0.572604, 0, -0.572604, 0.819832, 0, 0.690644, -1.49594)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("6_getg4")
+volume_db = -10.0
+script = ExtResource("7_5ew62")
+
+[connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_finished"]

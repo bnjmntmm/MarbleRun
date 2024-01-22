@@ -24,7 +24,7 @@ func addXToMesh():
 	area_init_box.get_child(0).get_shape().size.x = area_init_box.get_child(0).get_shape().get_size().x + 0.1
 	area_init_box.get_child(1).get_mesh().size.x = area_init_box.get_child(1).get_mesh().size.x + 0.1
 func substractXFromMesh():
-	if area_init_box.get_child(0).get_shape().size.x < 0.1:
+	if area_init_box.get_child(0).get_shape().size.x < 0.2:
 		return
 	else:
 		area_init_box.get_child(0).get_shape().size.x = area_init_box.get_child(0).get_shape().get_size().x - 0.1
@@ -33,7 +33,7 @@ func addYToMesh():
 	area_init_box.get_child(0).get_shape().size.z = area_init_box.get_child(0).get_shape().get_size().z + 0.1
 	area_init_box.get_child(1).get_mesh().size.z = area_init_box.get_child(1).get_mesh().size.z + 0.1
 func substractYFromMesh():
-	if area_init_box.get_child(0).get_shape().size.z < 0.1:
+	if area_init_box.get_child(0).get_shape().size.z < 0.2:
 		return
 	else:
 		area_init_box.get_child(0).get_shape().size.z = area_init_box.get_child(0).get_shape().get_size().z - 0.1

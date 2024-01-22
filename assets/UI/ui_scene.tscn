@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://crjjptruyvyc"]
+[gd_scene load_steps=35 format=3 uid="uid://crjjptruyvyc"]
 
 [ext_resource type="Script" path="res://assets/UI/SelectionWheel.gd" id="1_7v7rp"]
 [ext_resource type="Script" path="res://assets/UI/UI.gd" id="1_nicyg"]
+[ext_resource type="Texture2D" uid="uid://d2l1p4nydmr31" path="res://assets/icon/arrows.png" id="3_bjl66"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcuuj"]
 resource_name = "green"
@@ -781,6 +782,18 @@ reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_thxxk")
 }
+
+[node name="Boost" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 1.818
+anchor_top = 1.837
+anchor_right = 1.818
+anchor_bottom = 1.837
+offset_left = -247.063
+offset_top = -255.831
+offset_right = 264.937
+offset_bottom = 256.169
+texture = ExtResource("3_bjl66")
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.168145, 0.985762, 0, -0.985762, -0.168145, 0, 6.8578, -3.1862)
