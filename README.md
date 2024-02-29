@@ -1,9 +1,8 @@
 
 ## Marble Run
 
-Marble Run was a Mixed Reality Project made in Godot 4.1.2.
-The Games main purpose was to try out the VR capabilities of Godot and also to pass a Module in University
-
+Marble Run was a Mixed Reality Project made in Godot 4.1.2 to try out the Engines capabilites in VR.
+The Main Goal is to build the largest track and have the marble land in the finish. At the End the Player can submit their Score to an online Leaderboard.
 
 
 
